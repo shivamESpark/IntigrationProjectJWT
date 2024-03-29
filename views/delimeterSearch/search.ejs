@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Delimeter</title>
+</head>
+<style>
+    .main_body{
+        margin: 0 a;
+    }
+
+    #headt{
+        background-color: rgb(255, 183, 94);
+        width: 40px;
+    }
+    tr:nth-child(2n){
+        background-color: bisque;
+        text-align: center;
+    }
+    tr:nth-child(2n + 1){
+        background-color: rgb(238, 228, 215);
+        text-align: center;
+    }
+    td, th{
+        padding: 10px 10px;
+    }
+    #handler, form, form select{
+        margin: 20px auto;
+        text-align: center;
+        font-size: 20px;
+        font-weight: bold;
+    }
+    a{
+        text-decoration: none;
+        color: black;
+    }
+    a:hover{
+        color:gray;
+    }
+    #btn{
+        font-size: 21px;
+        font-weight: bold;
+        background-color: rgb(51, 31, 5);
+        color:wheat;
+        border-radius: 7px;
+    }
+    #sq{
+        background-color: antiquewhite;
+        font-size: 21px;
+        font-weight: bold;
+        width: 70vw;
+        border-radius: 7px;
+    }
+</style>
+<body>
+    <div class="main_body">
+        <center>
+        <h1>Search By Delimter</h1>
+        <%- include('parcials/delimiter_table.ejs') %>
+        
+        
+        <br>
+            <!-- form start -->
+            <form method="get">
+                <div id="nsearch">
+                    <input type="text" id="sq" tabindex="1" value="<%= locals.s %>" autofocus name="sqlquery" id="sqlquery" placeholder="Enter SID">
+                    <input type="submit" id="btn"  tabindex="2" class="btn" name="submit">
+                    <br>
+                </div>
+            </form>
+            <!-- form end -->
+        </div>
+       
+        <% if (locals.field != undefined || locals.field != null || locals.result !=null || locals.result != undefined ||  !locals.error){ %>
+           
+            <table>
+                <tr id="headt">
+                    <% field.forEach(f => { %>
+                        <td><%= f.name %></td>   
+                    <%}); %>
+                </tr>
+                 <% if (locals.result.length < 1){ %>
+                <h3>Sorry No Result Found for The Query!</h3>
+                <% } %>
+                <% result.forEach(result => { %>
+                <tr>
+                    <% for(let i=0; i<field.length; i++){ %>
+                        <td><%= result[field[i].name] %></td>
+                    <% } %>
+                </tr>
+                <% }) %>
+            </table>
+                    
+        <% } %>
+    </center>
+</body>
+</html>

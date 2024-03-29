@@ -61,6 +61,8 @@ app.use("/kukucube", authorization, kukuCube);
 const tickTackToe = require("./routes/tickTackToe/tickTackToe");
 app.use("/tickTacToe", authorization, tickTackToe);
 
+const delimeterSearch = require("./routes/delimeterSearch/delimeterSearch");
+app.use("/delimetersearch", authorization, delimeterSearch);
 
 
 
