@@ -64,7 +64,8 @@ app.use("/tickTacToe", authorization, tickTackToe);
 const delimeterSearch = require("./routes/delimeterSearch/delimeterSearch");
 app.use("/delimetersearch", authorization, delimeterSearch);
 
-
+const dynamicGried = require("./routes/dynamicGrid/dynamicGrid");
+app.use("/dynamicgrid", dynamicGried);
 
 
 

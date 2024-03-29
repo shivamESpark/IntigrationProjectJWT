@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Grid View</title>
+</head>
+<style>
+    td{
+        text-align: center;
+        padding: 9px;
+    }
+    tr:nth-child(2n){
+        background-color: rgb(176, 236, 228);
+    }
+    
+    #sqlquery{
+        font-size: 22px;
+        width: 90vw;
+        border-radius: 7px;
+        padding: 3px;
+    }
+    #btn{
+        font-size: 20px;
+        background-color: black;
+        color: white;
+        font-weight: bold;
+        border: none;
+        padding: 6px;
+        margin-left: 0;
+        border-radius: 7px;
+    }
+    #headt{
+        background-color: rgb(52, 105, 250);
+        font-weight: bolder;
+        color: aliceblue    ;
+    }
+
+</style>
+<body>
+<center>
+    <form method="get">
+        <table>
+            <h1>Type SQL : Shivam Rana</h1>
+            <tr>
+                <td><input type="text" name="sqlquery" id="sqlquery" placeholder="select * from table"></td>
+                <td><input type="submit" id="btn" name="submit"></td>
+            </tr>
+        </table>
+
+    </form>
+
+    <% if (field != undefined || field != null || !error){ %>
+    <table>
+        <tr id="headt">
+            <% field.forEach(f => { %>
+                <td><%= f.name %></td>   
+            <%}); %>
+        </tr>
+        <% result.forEach(result => { %>
+            <tr>
+                <% for(let i=0; i<field.length; i++){ %>
+                    <td><%= result[field[i].name] %></td>
+                <% } %>
+            </tr>
+            <% }) %>
+        
+    </table>
+        
+
+    <div id="handler">
+    
+        <%  if(pid == 1){ %>
+            <<
+            <
+        <% } else { %>
+            <a href="/<%= 1 %>/?sqlquery=<%= psql %>"><<</a>
+            <a href="/<%= +pid - 1 %>/?sqlquery=<%= psql %>"><</a>
+    
+        <% } %>
+    
+        <%= pid %>
+    
+        <%  if(pid == nPage){ %>
+            >
+            >>
+        <% } else { %>
+            <a href="/<%= +pid + 1 %>/?sqlquery=<%= psql %>">></a>
+            <a href="/<%= pid = nPage %>/?sqlquery=<%= psql %>">>></a> 
+        <% } %>
+    <% } else if(error) { %>
+        <% if(error == true){ %>
+            <h5>Please Enter A query!</h5>
+        <% } else { %>
+        <p>Error : <%= error %> </p>
+        <% } %>
+    <% } %>
+      
+    </div>
+    
+</center>
+    
+    
+  
+   
+</body>
+
+    
+
+</html>
