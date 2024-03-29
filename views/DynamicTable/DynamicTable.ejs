@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Table</title>
+</head>
+<style>
+    td{
+        padding: 20px;
+        margin: 10px;
+    }
+    td:nth-child(2n){
+        background-color: aqua;
+    }
+    td:nth-child(2n + 1){
+        background-color: rgb(255, 196, 164);
+    }
+</style>
+<script>
+    var tbl = document.getElementById("t");
+    colcnt = 2;
+    rowcnt = 2;
+    function onColPlus(){
+        var colplus = document.createElement("td");
+        var rows = document.querySelectorAll("tr");
+        rows.forEach(row=>{
+            row.appendChild(colplus.cloneNode(true));
+        })
+        colcnt += 1;
+    }
+
+    function onColMinus(){
+        if(colcnt == 2){
+            alert("you can't delete");
+            return;
+        }
+        var rows = document.querySelectorAll("tr");
+        rows.forEach(row=>{
+            row.removeChild(row.lastChild);
+        })
+        colcnt -= 1;
+    }
+
+    function onRowP(){
+        let tbl = document.getElementById("t");
+        var row = document.createElement("tr");
+        var col = document.createElement("td");
+
+        tbl.appendChild(row);
+        for(let i=0; i<colcnt; i++){
+            row.appendChild(col.cloneNode(true));
+        }
+        rowcnt += 1;
+    }
+
+    function onRowM(){
+        
+        if(rowcnt == 2){
+            alert("can't delelte");
+            return;
+        }
+        var table = document.getElementById('t');
+        table.removeChild(table.lastElementChild);
+        rowcnt -= 1;
+    }
+
+</script>
+<body>
+    <h1>Dynamic Table </h1>
+    <button class="btn" id="colplus" onclick="onColPlus();">+</button>
+    <button class="btn" id="colminus" onclick="onColMinus();">-</button>
+    <div style="display: flex;">
+        <table id="t">
+            <tr class="tr1">
+                <td></td>
+                <td></td>
+            </tr>
+            <tr class="tr1">
+                <td></td>
+                <td></td>
+            </tr>
+        </table>  
+    </div>
+    <button class="btn" id="rowplus" onclick="onRowP()">+</button>
+    <button class="btn" id="rowminus" onclick="onRowM()">-</button>
+    
+</body>
+</html>

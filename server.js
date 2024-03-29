@@ -49,6 +49,12 @@ app.get("/home", authorization, (req, res)=>{
 });
 
 
+const dynamicTable = require("./routes/dynamicTable/dynamicTable"); 
+app.use("/dynamic", authorization, dynamicTable);
+
+
+
+
 app.get("/logout", authorization, (req, res)=>{
     return res.clearCookie("access_token").status(200).json({message:"successfully logout"});
 })
