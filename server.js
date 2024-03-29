@@ -55,6 +55,11 @@ app.use("/dynamic", authorization, dynamicTable);
 const eventsTable = require("./routes/eventsTable/eventsTable");
 app.use("/events", authorization, eventsTable);
 
+const kukuCube = require("./routes/kukuCube/kukuCube");
+app.use("/kukucube", authorization, kukuCube);
+
+
+
 
 
 app.get("/logout", authorization, (req, res)=>{

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>colors game</title>
+</head>
+<style>
+    td{
+        background-color: rgb(127, 150, 255);
+        margin: 5px;
+        padding: 40px;
+        border-radius: 5px;
+    }
+    body{
+        background-color: wheat;
+        color: rg
+    }
+
+</style>
+
+<body>
+    <center>
+        <h1>Score : <span id="sc">0</span> &nbsp;&nbsp; <span>Timer : </span><span id="times">00</span></h1>
+        <table id="t">
+            <tr class="r">
+                <td class="d1"></td>
+                <td class="d1"></td>
+            </tr>
+            <tr class="r">
+                <td class="d1"></td>
+                <td class="d1"></td>
+            </tr>
+        
+        </table>
+
+    </center>
+</body>
+
+
+<script>
+    // adding the event listners
+    
+    let td = document.getElementsByTagName("td");
+    td[0].addEventListener("click", addon);
+    // for(let i=0; i<td.length; i++){
+    //     td[i].addEventListener("click", addon);
+    // }
+    
+    
+
+    function colors(){
+        let r = Math.floor(Math.random(10)*255);
+        let g = Math.floor(Math.random(10)*255);
+        let b = Math.floor(Math.random(10)*255);
+
+        return `rgb(${r}, ${g}, ${b})`;
+    }
+    
+    let score = -1;
+    
+    function addon(){
+        
+        
+        var table = document.getElementById("t");
+        var rowCount = table.rows.length;
+
+        var row = table.insertRow(rowCount);
+        var colCount = table.rows[0].cells.length;
+        
+        for(var i=0; i<colCount; i++) {
+            var newcell = row.insertCell(i);
+            newcell.innerHTML = table.rows[0].cells[i].innerHTML;
+        }
+
+
+        let tr = document.getElementsByTagName("tr");
+        let tl = document.querySelector("table");
+        for(let i=0; i<tr.length; i++){
+            tr[i].appendChild(document.createElement("td"));
+        }
+
+        for(let i=0; i<td.length; i++){
+            td[i].addEventListener("click", wrong);
+        }
+        
+
+        let c = colors();
+        for(let i=0; i<td.length; i++){
+            td[i].style.background = c;
+            td[i].style.opacity = 1;
+        }
+
+        
+        opacity();
+        
+    }
+    
+    
+    function wrong(){
+        score-=1;
+        document.getElementById("sc").innerHTML = score;
+        // console.log(score)
+    }
+
+    
+    let x = 0;
+
+    function opacity(){
+        td[0].removeEventListener("click", addon);
+        let x = Math.floor(Math.random(10)*td.length);
+        td[x].style.opacity = 0.5;   
+        td[x].addEventListener("click", addon);
+        score+=2;
+        document.getElementById("sc").innerHTML = score;
+
+        
+    }
+
+    
+    
+    timer();
+    function timer(){
+        let count = 30;
+        const timer = setInterval(function(){
+            count--;
+            // console.log(count);  
+            document.getElementById("times").innerHTML = count;
+            if(count == 0){
+                clearInterval(timer);
+                document.getElementById("t").innerHTML = "<h1>Game Over</h1>";
+            }
+        }, 1000);
+    }
+
+
+
+
+    </script>
+</html>
