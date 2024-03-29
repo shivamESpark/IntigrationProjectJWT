@@ -58,6 +58,10 @@ app.use("/events", authorization, eventsTable);
 const kukuCube = require("./routes/kukuCube/kukuCube");
 app.use("/kukucube", authorization, kukuCube);
 
+const tickTackToe = require("./routes/tickTackToe/tickTackToe");
+app.use("/tickTacToe", authorization, tickTackToe);
+
+
 
 
 

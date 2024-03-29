@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tick tack toe</title>
+    <style>
+        body{
+            background-color: wheat;
+        }
+        .ic{
+            border-radius: 5px;
+            margin: 4px;
+            width: 50%;
+            padding: 5% 4%;
+            background-color: black;
+            color: wheat;
+            font-weight: bolder;
+            font-size: 37px;
+        }
+        .o1{
+            display: flex;
+        }
+        #btn_rst{
+            background-color: green;
+            color: antiquewhite;
+            padding: 1%;
+            font-weight: bold;
+            font-size: 1rem;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<center>
+<body>
+    <h1>Shivam Rana</h1>
+    <h1>Tick Tac Toe</h1>
+    <div>
+        <div class="o1">
+            <div class="ic" id="0"></div>
+            <div class="ic" id="1"></div>
+            <div class="ic" id="2"></div>
+        </div>
+        <div class="o1">
+            <div class="ic" id="3"></div>
+            <div class="ic" id="4"></div>
+            <div class="ic" id="5"></div>
+        </div>
+        <div class="o1">
+            <div class="ic" id="6"></div>
+            <div class="ic" id="7"></div>
+            <div class="ic" id="8"></div>
+        </div>
+    </div>    
+    <button id="btn_rst">Restart</button>
+</body>
+</center>
+<script>
+
+    function tick_tack_toe(){
+        
+        let sing = "X";
+        let win_call_cnt = 0;
+        for(let i =0 ; i<9; i++){
+            document.getElementById(i).addEventListener("click", addtext);
+            document.getElementById(i).innerHTML = ".";
+            document.getElementById(i).style.color = "black";
+        }
+    
+        function addtext(){
+            let id = this.getAttribute("id");
+            document.getElementById(id).innerHTML = (sing=="X") ? `${sing = "O"}` : `${sing = "X"}`;
+            document.getElementById(id).style.color = "wheat";
+            document.getElementById(id).removeEventListener("click", addtext);
+            win_call_cnt += 1;
+            if(win_call_cnt >= 5){
+                win(id);
+            }
+        }    
+    
+        function win(id){
+            const possible = [
+                [0,1,2],
+                [3,4,5],
+                [6,7,8],
+                [0,3,6],
+                [1,4,7],
+                [2,5,8],
+                [0,4,8],
+                [2,4,6]
+            ];
+            //console.log(document.getElementById(w[0]).innerText, ocument.getElementById(w[1]).innerText, ocument.getElementById(w[2]).innerText);
+            for(let w of possible){
+                if( document.getElementById(w[0]).textContent == document.getElementById(w[1]).textContent &&
+                    document.getElementById(w[1]).textContent == document.getElementById(w[2]).textContent &&
+                    document.getElementById(w[0]).textContent != "."
+                ){
+                    alert(`You Won ${document.getElementById(id).textContent}`);
+                    for(let i = 0 ; i<9; i++){
+                        document.getElementById(i).removeEventListener("click", addtext);
+                    }
+                    return true;
+                } //else {
+                   // console.log("false");
+               // }
+
+            
+            } 
+        }
+    }
+
+    tick_tack_toe();
+    let btn_rst = document.getElementById("btn_rst").addEventListener("click", reset);
+    function reset(){
+        tick_tack_toe();
+    }
+</script>
+</html>
