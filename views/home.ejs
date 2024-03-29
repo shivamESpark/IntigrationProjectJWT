@@ -4,53 +4,91 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>home</title>
+    <style>
+        body{
+            background-color: #f4cfb5;
+            
+        }
+        .menus:nth-child(2n){
+            background-color: rgb(204, 150, 88);
+        }
+        .menus:nth-child(2n + 1){
+            background-color: rgb(59, 35, 23);
+        }
+        .menus{
+            display: flex;
+            padding: 10px;
+        }
+        .menus a{
+            padding: 5px;   
+            text-align: center;
+            text-decoration: none;
+            color:rgb(165, 244, 206);
+            font-size: large;
+            font-weight: bold;
+        }
+        .menus p{
+            padding: 5px;
+            color: white;
+        }
+        #main{
+            margin: 0 auto;
+            width: 300px;
+            text-align: center;
+        }
+        .menus a:hover{
+            color: rgb(92, 47, 230);
+        }
+    </style>
 </head>
 <body>
-    <h1>Home</h1>
-    <p>Logged in</p>
-    <div id="dynamic" class="menus">
-        <!-- <p>Dynamic Tables</p> -->
-        <p><a href="http://localhost:8080/dynamic">Dynamic Table</a></p>
-    </div>
-    <div id="dynamic" class="menus">
-        <!-- <p>Events Table Tables</p> -->
-        <p><a href="http://localhost:8080/events">Events Table</a></p>
-    </div>
-    <div id="dynamic" class="menus">
-        <!-- <p>Events Table Tables</p> -->
-        <p><a href="http://localhost:8080/kukucube">KUKU Cube</a></p>
-    </div>
-    <div id="dynamic" class="menus">
-        <!-- <p>Events Table Tables</p> -->
-        <p><a href="http://localhost:8080/tickTacToe">Tick-Tack-Toe</a></p>
-    </div>
-    <div id="dynamic" class="menus">
-        <!-- <p>Events Table Tables</p> -->
-        <p><a href="http://localhost:8080/delimetersearch">Delimeter Search</a></p>
-    </div>
-    <div id="dynamic" class="menus">
-        <!-- <p>Events Table Tables</p> -->
-        <p><a href="http://localhost:8080/dynamicgrid/1">Dynamic Gried</a></p>
-    </div>
-    <div id="dynamic" class="menus">
-        <!-- <p>Events Table Tables</p> -->
-        <p><a href="http://localhost:8080/wireframeajax">Wire Frame AJAX</a></p>
-    </div>
-    <div id="dynamic" class="menus">
-        <!-- <p>Events Table Tables</p> -->
-        <p><a href="http://localhost:8080/studentURL/fname/asc/1">studentURL</a></p>
-    </div>
-    <div id="dynamic" class="menus">
-        <!-- <p>Events Table Tables</p> -->
-        <p><a href="http://localhost:8080/studentresult/1/12">student Result</a></p>
-    </div>
-    <div id="dynamic" class="menus">
-        <!-- <p>Events Table Tables</p> -->
-        <p><a href="http://localhost:8080/studentresult/result?pid=1">student result detailed</a></p>
-    </div>
-    <div id="dynamic" class="menus">
-        <!-- <p>Events Table Tables</p> -->
-        <p><a href="http://localhost:8080/timezone">Timezones</a></p>
+    <div id="main">
+        <h1>Home</h1>
+        <p>Logged in</p>
+        <div id="dynamic" class="menus">
+            <p>Dynamic Tables</p>
+            <p><a href="http://localhost:8080/dynamic">Dynamic Table</a></p>
+        </div>
+        <div id="event" class="menus">
+            <p>Events Table Tables</p>
+            <p><a href="http://localhost:8080/events">Events Table</a></p>
+        </div>
+        <div id="kukucube" class="menus">
+            <p>KukuCube</p>
+            <p><a href="http://localhost:8080/kukucube">KUKU Cube</a></p>
+        </div>
+        <div id="tickTacToe" class="menus">
+            <p>Tick Tac Toe</p>
+            <p><a href="http://localhost:8080/tickTacToe">Tick-Tack-Toe</a></p>
+        </div>
+        <div id="delimetersearch" class="menus">
+            <p>Delimeter Search</p>
+            <p><a href="http://localhost:8080/delimetersearch">Delimeter Search</a></p>
+        </div>
+        <div id="dynamicgrid" class="menus">
+            <p>Dynamic Gried</p>
+            <p><a href="http://localhost:8080/dynamicgrid/1">Dynamic Gried</a></p>
+        </div>
+        <div id="wireframeajax" class="menus">
+            <p>Wireframe Ajax</p>
+            <p><a href="http://localhost:8080/wireframeajax">Wire Frame AJAX</a></p>
+        </div>
+        <div id="studentURL" class="menus">
+            <p>Student URL</p>
+            <p><a href="http://localhost:8080/studentURL/fname/asc/1">studentURL</a></p>
+        </div>
+        <div id="studentresult" class="menus">
+            <p>Student Result</p>
+            <p><a href="http://localhost:8080/studentresult/1/12">student Result</a></p>
+        </div>
+        <div id="result" class="menus">
+            <p>Student Result</p>
+            <p><a href="http://localhost:8080/studentresult/result?pid=1">student result detailed</a></p>
+        </div>
+        <div id="timezone" class="menus">
+            <p>TimeZones</p>
+            <p><a href="http://localhost:8080/timezone">Timezones</a></p>
+        </div>
     </div>
 </body>
 </html>
