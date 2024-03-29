@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Times Zones</title>
+    <style>
+        body{
+            background-color: rgb(246, 229, 246);
+        }
+    </style>
+</head>
+<body>
+    <center>
+    <h1>Timezones</h1>
+    <h2 id="timezone"></h2>
+    <form>
+        <select name="city" id="city">
+            <option value="">Select City</option>
+        </select>
+    </form>
+    </center>
+</body>
+</html>     
+<script>
+    const city = document.getElementById("city");
+    
+
+    city.addEventListener("change", ()=>{showCityTime(city.value)});
+
+    function showCityTime(offset){
+        const timeh2 = document.getElementById("timezone");
+        let d = new Date();
+        let utc =  d.getTime() + (d.getTimezoneOffset() * 60000);
+        const time = new Date(utc + (3600000 * offset));
+        timeh2.innerHTML = `${time.toLocaleTimeString()} || ${time.toLocaleDateString()}`
+    }
+    
+
+    function setCityValue(data){
+        data.forEach((values, i)=>{
+            // console.log(values);
+            const newCity = document.createElement("option");
+            newCity.innerHTML = values.timezone;
+            newCity.value = (values.offset/3600);
+            city.appendChild(newCity);
+        })
+    }
+
+    async function dbTimes(){
+        const response = await fetch("http://localhost:8080/timezone/db");
+        const data  = await response.json();        
+        setCityValue(data);
+    }
+    dbTimes();
+
+</script>

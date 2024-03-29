@@ -76,6 +76,9 @@ app.use("/wireframeajax", wireFrameAJAX);
 const studentResult = require("./routes/studentResult/studentResult");
 app.use("/studentresult", studentResult);
 
+const timezone = require("./routes/timezone/timezone");
+app.use("/timezone", timezone);
+
 
 app.get("/logout", authorization, (req, res)=>{
     return res.clearCookie("access_token").status(200).json({message:"successfully logout"});
