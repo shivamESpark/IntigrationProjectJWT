@@ -52,6 +52,8 @@ app.get("/home", authorization, (req, res)=>{
 const dynamicTable = require("./routes/dynamicTable/dynamicTable"); 
 app.use("/dynamic", authorization, dynamicTable);
 
+const eventsTable = require("./routes/eventsTable/eventsTable");
+app.use("/events", authorization, eventsTable);
 
 
 

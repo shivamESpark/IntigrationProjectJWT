@@ -1,0 +1,223 @@
+<script>
+// mouse event
+
+function test(){
+    alert('hello shivam!');
+}
+
+// click
+document.getElementById("td_test").addEventListener("click", test);
+        
+// right click
+document.getElementById("rgt").addEventListener("contextmenu", (e) => { 
+    console.log("right clicked");
+    test();
+    e.preventDefault();
+});
+
+// double click
+document.getElementById("dbl").addEventListener("dblclick", ()=>{
+    console.log("double clicked happend")
+    test();
+});
+
+
+// trigged when mouse click downs
+document.getElementById("md").addEventListener("mousedown", ()=>{
+    console.log("mouse down");
+    test();
+});
+
+// on mouseenter
+document.getElementById("me").addEventListener("mouseenter", ()=>{
+    console.log("mouseenter");
+    document.getElementById("me").innerHTML = "welcome";
+    document.getElementById("me").style.fontSize = "17px"
+    test();
+});
+
+// on mouse leave
+document.getElementById("ml").addEventListener("mouseleave", ()=>{
+    console.log("mouseleave");
+    document.getElementById("ml").innerHTML = "bye bye";
+    document.getElementById("ml").style.fontSize = "17px"
+    test();
+});
+
+// called on mouse move from the eelement
+document.getElementById("mm").addEventListener("mousemove", ()=>{
+    console.log("mousemove");
+    test();
+});
+
+// triggered when mouse will goes out
+document.getElementById("mot").addEventListener("mouseout", ()=>{
+    console.log("mouseout");
+    test();
+});
+
+// trigers when mouse hovering the element
+document.getElementById("mo").addEventListener("mouseover", ()=>{
+    console.log("mouseover");
+    test();
+});
+
+// triggers when the mouse clicked up
+document.getElementById("mu").addEventListener("mouseup", ()=>{
+    console.log("mouseup");
+    test();
+});
+
+// triggers when the mouse wheel rotates
+document.getElementById("whl").addEventListener("wheel", ()=>{
+    console.log("wheel rotated");
+    const wh = document.getElementById("whl").style
+    wh.background = "green";
+    wh.fontSize = '30px';
+    test();
+});
+
+
+document.getElementById("fcs").addEventListener("focus", ()=>{
+    console.log("focus treeged");
+    const fc = document.getElementById("fcs").style;
+    fc.background = "blue";
+    // test();
+});
+
+document.getElementById("fcsin").addEventListener("focusin", ()=>{
+    console.log("focusin treeged");
+    let fdc = document.getElementById("fcsin").style;
+    fdc.background = "orange";
+    fdc.fontSize = "30px";
+    // test();
+});
+
+document.getElementById("fcsout").addEventListener("focusout", ()=>{
+    console.log("focusin treeged");
+    let fdc = document.getElementById("fcsout").style;
+    fdc.background = "YELLOW";
+    fdc.fontSize = "30px";
+    // test();
+});
+
+//when blue event fires works almost same as the focus out
+document.getElementById("blr").addEventListener("blur", ()=>{
+    document.getElementById("blr").style.background = "orange";
+});
+
+
+//oninput 
+document.getElementById("inp").addEventListener("input", ()=>{
+    document.getElementById("inp").style.fontWeight = "bolder";
+    document.getElementById("inp").style.color = "purple";
+});
+
+//onchange when focus goes out then this event will be fire
+document.getElementById("cng").addEventListener("change", ()=>{
+    document.getElementById("cng").style.fontWeight = "bolder";
+    document.getElementById("cng").style.color = "green";
+})
+
+//copy 
+document.getElementById("cpy").addEventListener("copy", ()=>{
+    console.log("someone coping data");
+    alert("don't try to copy me!")
+});
+
+//cut
+document.getElementById("ct").addEventListener("cut", ()=>{
+    console.log("someone try to cut text");
+    alert("Hey why are you cut the text! you won't!");
+});
+
+
+// drag stat
+document.getElementById('drs').addEventListener("dragstart", ()=>{
+    console.log("drag started");
+    document.getElementById("ds1").innerHTML = "Drag Started";
+});
+
+// drang going on
+document.getElementById('drag').addEventListener("drag", ()=>{
+    console.log("dragging");
+    document.getElementById("ds2").innerHTML = "Drag";
+});
+
+// drang end
+document.getElementById('dre').addEventListener("dragend", ()=>{
+    console.log("drag end");
+    document.getElementById("ds3").innerHTML = "Drag End!";
+});
+
+
+// dragenter 
+document.getElementById("drgenter").addEventListener("dragenter", ()=>{
+   console.log("drag enter");
+   document.getElementById("ds4").innerHTML = "Dragging Element Enter!";
+});
+
+// dragleave
+document.getElementById("dragleave").addEventListener("dragleave", ()=>{
+    console.log("drag leave");
+    document.getElementById("ds5").innerHTML = "Dragging Element Leave!";
+ });
+ let c = 0
+// dragend
+document.getElementById("drgover").addEventListener("dragover", ()=>{
+    console.log("drag over");
+    c+=1
+    document.getElementById("ds6").innerHTML = "Dragging Element Hovering ! " + c;
+ });
+
+// drangdrop
+document.getElementById("drgdrop").addEventListener("drop", ()=>{
+    console.log("drag drop");
+    document.getElementById("ds7").innerHTML = "Finally Dropped The Element!";
+ });
+
+ // key down
+ document.getElementById("k1").addEventListener("keydown", ()=>{
+    console.log("key down");
+    document.getElementById("kd").innerHTML = "Key Down";
+ });
+
+ // key pressing 
+ document.getElementById("k2").addEventListener("keypress", ()=>{
+    console.log("key pressing...!");
+    document.getElementById("kp").innerHTML = "pressing key....";
+ });
+
+ // key up
+ document.getElementById("k3").addEventListener("keyup", ()=>{
+    console.log("key pressing...!");
+    document.getElementById("ku").innerHTML = "pressing up...";
+ });
+
+
+ // on scroll
+ document.getElementById("scrl").onscroll = ()=>{
+    console.log("scroll event fire");
+    document.getElementById("scrl").style.color = "orange";
+ }
+
+// on search 
+document.getElementById("srch").onsearch = ()=>{
+    console.log("searh event");
+    document.getElementById("srch").style.color = "blue";
+ }
+
+
+// on toggle
+document.getElementById('tgl').ontoggle = ()=>{
+    console.log("on toggle fired");
+    alert("toggle event occured");
+}
+
+
+document.getElementById("sss").addEventListener("select", ()=>{
+    alert("why are you selecting me!");
+    console.log("code enjection");
+    document.getElementById("slt").innerHTML = "!!!!!!!!warning!!!!!!!!!!"
+    document.getElementById("slt").style.color = "red";
+})

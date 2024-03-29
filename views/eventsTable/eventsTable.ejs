@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Script</title>
+
+    <style>
+        body{
+            background-color:antiquewhite;
+        }
+        td{
+            margin: 15px;
+            padding: 30px;
+            font-size: large;
+        }
+        #tbl{
+            border: 2px solid  green;
+        }
+        
+        
+        .colss{
+            background-color: #6693e7;
+            color: antiquewhite;
+        }
+        .elen{
+            background-color: #000000;
+            color: antiquewhite;
+        }
+        </style>
+
+
+</head>
+<body>
+    <center>
+    <h1>Event Table</h1>
+    <table id="tbl" border="2px solid blue">
+        <tr class="rowss">
+            <!-- onclick -->
+            <td class="colss">
+                <h5>onclick</h5>
+                <button onclick="test()">click!</button>
+            </td>
+            <!-- using addEventListener -->
+            <td class="elen">
+                <h5>onclick fun</h5>
+                <button id="td_test">listener!</button>
+            </td>
+
+            <!-- fires on right click  -->
+            <td class="colss">
+                <h5>oncontextmenu</h5>
+                <button id="rgt">right</button>
+            </td>
+            
+            <!-- double click  -->
+            <td class="elen">
+                <h5>ondblclick</h5>
+                <button id="dbl">double</button>
+            </td>
+
+            <!-- mouse down -->
+             <td class="colss">
+                <h5>onmousedown</h5>
+                <button id="md" >down mouse</button>
+            </td>
+            
+            <!-- mouseenter -->
+            <td class="elen">
+                <h5>onmouseenter</h5>
+                <button id="me">enter mouse</button>
+            </td>
+            
+            <!-- onmouse move -->
+            <td class="colss">
+                <h5>onmousemove</h5>
+                <button id="mm">mouse move</button>
+            </td>
+
+           
+            
+        </tr>
+        <tr>
+            <!-- on mouse leave -->
+            <td class="elen">
+                <h5>onmouseout</h5>
+                <button id="mot">mouse out</button>
+            </td>
+            
+            <!-- on mouse over -->
+            <td class="colss">
+                <h5>onmousemover</h5>
+                <button id="mo">mouse over</button>
+            </td>
+
+            <!-- when mouse key will up -->
+            <td class="elen">
+                <h5>onmouseup</h5>
+                <button id="mu">mouse up</button>
+            </td>
+
+            <td class="colss">
+                <h5>onwheel</h5>
+                <button id="whl">wheel</button>
+            </td>
+
+            <td class="elen">
+                <h5>focus</h5>
+                <button id="fcs">focus</button>
+            </td>        
+
+            <td class="colss">
+                <h5>focusin</h5>
+                <input id="fcsin">
+            </td>        
+
+            <td class="elen">
+                <h5>blur</h5>
+                <input type="text" id="blr">
+            </td>        
+           
+        </tr>
+        <tr>
+            <td class="colss">
+                <h5>cut</h5>
+                <h3 id="ct">Cut The Text and Paste Don't you belive!</h3>
+            </td>        
+            <td class="elen">
+                <h5>copy</h5>
+                <h3 id="cpy">Try to copy me I will send message</h3>
+            </td>  
+            <td class="colss">
+                <h5>cut</h5>
+                <h3 id="ct">Cut The Text and Paste Don't you belive!</h3>
+            </td>  
+            <td class="elen">
+                <h5>oninput</h5>
+                <input type="text" name="some" id="inp" value="IN">
+            </td>   
+            <td class="colss">
+                <h5>onchange</h5>
+                <input type="text" name="some" id="cng" value="change">
+            </td>      
+
+            <td class="elen">
+                <h5>DrageStart</h5>
+                <input type="text" name="drg" id="drs" value="drag Start">
+                <h4 id="ds1"></h4>
+            </td>   
+            <td class="colss">
+                <h5>Drag</h5>
+                <input type="text" name="drg" id="drag" value="drag">
+                <h4 id="ds2"></h4>
+            </td>  
+           
+        </tr>
+
+        <tr>
+            <td class="elen">
+                <h5>DrageEnter</h5>
+                <input type="text" name="drgent" id="drgenter" value="drag enter">
+                <h4 id="ds4"></h4>
+            </td>   
+            <td class="colss">
+                <h5>DragLeave</h5>
+                <input type="text" name="drglv" id="dragleave" value="drag leave">
+                <h4 id="ds5"></h4>
+            </td>  
+            <td class="elen">
+                <h5>DrageOver</h5>
+                <input type="text" name="drgover" id="drgover" value="drag over">
+                <h4 id="ds6"></h4>
+            </td>   
+            <td class="colss">
+                <h5>Drop</h5>
+                <input type="text" name="drop" id="drgdrop" value="drop">
+                <h4 id="ds7"></h4>
+            </td>  
+
+            <td class="elen">
+                <h5>DrageEnd</h5>
+                <input type="text" name="drg" id="dre" value="drag end">
+                <h4 id="ds3"></h4>
+            </td>   
+            <td class="colss">
+                <h5>focusout</h5>
+                <input id="fcsout">
+            </td>        
+             <!-- mouseleave -->
+             <td class="elen">
+                <h5>onmouseleave</h5>
+                <button id="ml">leave mouse</button>
+            </td>
+            
+        </tr>
+        
+        <tr>
+            <td class="colss">
+                <h5>keydown</h5>
+                <input type="text" id="k1">
+                <h3 id="kd"></h3>
+            </td>
+
+            <td class="elen">
+                <h5>keypress</h5>
+                <input type="text" id="k2">
+                <h3 id="kp"></h3>
+            </td>
+            <td class="colss">
+                <h5>keyup</h5>
+                <input type="text" id="k3">
+                <h3 id="ku"></h3>
+            </td>
+            <td class="elen">
+                <h5>scroll</h5>
+                <div id="scrl" style="overflow: scroll; width: 200px; height: 100px;">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi dicta nostrum odio, possimus nesciunt esse ipsa iste ut dolores inventore dolore consequatur perferendis blanditiis dignissimos assumenda neque soluta at culpa officiis voluptates temporibus! Repellat necessitatibus, recusandae, odio porro pariatur vero nam dolorum quod, quia unde placeat animi hic inventore adipisci aut ratione maiores nostrum minima laborum consectetur ipsum mollitia numquam sit. Nemo earum dolore quibusdam, eligendi dolor, doloribus sint dicta quidem nihil eaque numquam reiciendis ipsam saepe laudantium nobis architecto blanditiis. Dolore alias ipsam repellendus doloribus unde voluptas? Accusantium nisi necessitatibus quo odio repudiandae voluptatum autem, labore veniam eveniet, dolorum maiores ad minima alias dolore quas voluptatibus magnam aut pariatur nulla ea. Incidunt, aspernatur. Explicabo ea obcaecati dignissimos nemo, quae, omnis laboriosam delectus consequatur voluptates, eius beatae harum facilis tempore. Ipsum earum deleniti nulla libero ipsa nemo laudantium sed dicta, non modi commodi amet qui, reprehenderit eius itaque, temporibus facere voluptatum ratione. Dolore qui voluptates facilis, voluptatibus libero aperiam voluptatum ipsum omnis alias distinctio quis? Doloribus repellat mollitia accusantium fuga. Ut, quasi ipsa! Incidunt iusto dignissimos esse dicta sequi consequatur quia quas sint aspernatur cum, sed eius magni modi tempora. Amet dolor maxime aliquid quis tenetur alias incidunt reprehenderit. Laborum.
+                </div>
+            
+                <h3 id="kp"></h3>
+            </td>
+            <td class="colss">
+                <h5>search</h5>
+                <input type="search" id="srch">
+        
+            </td>
+            <td class="elen">
+                <h5>ontoggel</h5>
+                <details id="tgl">
+                    <summary>Hello Aliene</summary>
+                </details>
+                <h3 id="kp"></h3>
+            </td>
+            <td class="colss">
+                <h5>select</h5>
+                <input type="text" id="sss" value="Select My Text and See What I do!">
+                <h3 id="slt"></h3>
+            </td>
+
+
+        </tr>
+
+        
+    </table>
+
+</center>
+    
+</body>
+<%- include("./events.ejs") %>
+</html> 
