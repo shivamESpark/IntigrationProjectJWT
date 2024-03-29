@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=\, initial-scale=1.0">
+    <title>Students</title>
+</head>
+<style>
+    th{
+        background-color: rgb(255, 183, 94);
+    }
+    tr:nth-child(2n){
+        background-color: bisque;
+        padding: 10px;
+        text-align: center;
+    }
+    tr:nth-child(2n + 1){
+        background-color: rgb(238, 228, 215);
+        padding: 10px;
+        text-align: center;
+    }
+    #handler{
+        margin: 20px auto;
+        text-align: center;
+        font-size: 20px;
+        font-weight: bold;
+    }
+</style>
+<body>
+    
+    <h1>Students</h1>
+    <table>
+        <thead>
+            <th>Student ID</th>
+            <th>first name</th>
+            <th>last name</th>
+            <th>course</th>
+            <th>current address</th>
+            <th>permenant address</th>
+            <th>email</th>
+            <th>phone</th>
+            <th>city</th>
+            <th>state</th>
+            <th>is_female</th>
+            <th>Date of Birth</th>
+            <th>Time_at</th>
+        </thead>
+        
+    <tbody>
+        <% for(let i=0; i<result.length; i++){ %>
+            <tr>
+                <td><%= result[i].sid %></td>
+                <td><%= result[i].fname %></td>
+                <td><%= result[i].lname %></td>
+                <td><%= result[i].course %></td>
+                <td><%= result[i].c_address %></td>
+                <td><%= result[i].p_address %></td>
+                <td><%= result[i].email %></td>
+                <td><%= result[i].phone %></td>
+                <td><%= result[i].city %></td>
+                <td><%= result[i].state %></td>
+                <td><%= result[i].is_female ? "female" : "male" %></td>
+                <td><%= result[i].dob %></td>
+                <td><%= result[i].time_at %></td>
+            </tr>
+        <% } %>
+    </tbody>
+
+    </table>
+    <div id="handler">
+
+        <%  if(pid == 1){ %>
+            <<
+            <
+        <% } else { %>
+            <a href="/<%= field %>/<%= sort %>/<%= 1 %>"><<</a>
+            <a href="/<%= field %>/<%= sort %>/<%= +pid - 1 %>"><</a>
+    
+        <% } %>
+    
+        <%= pid %>
+    
+        <%  if(pid == 250){ %>
+            >
+            >>
+        <% } else { %>
+            <a href="/<%= field %>/<%= sort %>/<%= +pid + 1 %>">></a>
+            <a href="/<%= field %>/<%= sort %>/<%= pid = 1000 %>">>></a>
+    
+        <% } %>
+      
+    </div>
+    </body>
+</html>
