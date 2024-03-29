@@ -1,0 +1,110 @@
+<!-- attendance copy -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance : Shivam Rana</title>
+</head>
+<style>
+
+    th{
+        background-color: rgb(255, 183, 94);
+    }
+    tr:nth-child(2n){
+        background-color: bisque;
+        text-align: center;
+    }
+    tr:nth-child(2n + 1){
+        background-color: rgb(238, 228, 215);
+        text-align: center;
+    }
+    td, th{
+        padding: 10px 40px;
+    }
+    #handler, form, form select{
+        margin: 20px auto;
+        text-align: center;
+        font-size: 20px;
+        font-weight: bold;
+    }
+   
+</style>
+<body>
+
+    <center>
+    <h1>Attendance: Shivam Rana</h1>
+    <div id="content">
+        <form method="get">
+            <label for="month">Months</label>
+            <select name="mn" id="month" onchange="submit()">
+                <% if(month == 12){ %>
+                    <option value="12" selected>December</option>
+                <% } else { %>
+                    <option value="12">December</option>
+                <% } %>
+
+                <% if(month == 1){ %>
+                    <option value="1" selected>January</option>
+                <% } else { %>
+                    <option value="1">January</option>
+                <% } %>
+
+                <% if(month == 2){ %>
+                    <option value="2" selected>February</option>
+                    <% } else { %>
+                    <option value="2">February</option>
+                <% } %>
+                <input type="hidden" value="<%= pid %>" name="pid">
+
+            </select>
+        </form>
+
+        <table>
+            <thead>
+                <th>Student Id</th>
+                <th>first name</th>
+                <th>Days</th>
+                <th>Percentage</th>
+            </thead>
+            <tbody>
+                <% for(let i=0; i<result.length; i++){ %>
+                    <tr>
+                        <td><%= result[i].student_id %></td>
+                        <td><%= result[i].fname %></td>
+                        <td><%= result[i].aday %></td>
+                        <td><%= result[i].percentage %></td>
+                        
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+    <div id="handler">
+
+        <%  if(pid == 1){ %>
+            <<
+            <
+        <% } else { %>
+            <a href="/<%= 1 %>/<%= month %>"><<</a>
+            <a href="/<%= +pid - 1 %>/<%= month %>"><</a>
+    
+        <% } %>
+    
+        <%= pid %>
+    
+        <%  if(pid == 20){ %>
+            >
+            >>
+        <% } else { %>
+            <a href="/<%= +pid + 1 %>/<%= month %>">></a>
+            <a href="/<%= pid = 20 %>/<%= month %>">>></a>
+    
+        <% } %>
+      
+    </div>
+</center>    
+</body>
+</html>
+

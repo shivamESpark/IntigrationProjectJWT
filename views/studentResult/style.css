@@ -1,0 +1,51 @@
+th{
+    background-color: rgb(255, 183, 94);
+}
+tr:nth-child(2n){
+    background-color: bisque;
+    text-align: center;
+}
+tr:nth-child(2n + 1){
+    background-color: rgb(238, 228, 215);
+    text-align: center;
+}
+td, th{
+    padding: 10px 40px;
+}
+#handler, form, form select{
+    margin: 20px auto;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+a{
+    text-decoration: none;
+    color: #472f03;
+    font-weight: bolder;
+}
+a:hover{
+    color:#8b6826;
+}
+thead tr td{
+    font-weight: bolder;
+    background-color: #472f03;
+    color: wheat;
+}
+.btn{
+    background-color: #472f03;
+    color:wheat;
+    font-weight: bolder;
+    font-size: 17px;
+    border-radius: 7px;
+    padding: 6px;
+    margin: 10px;
+    border: none;
+}
+input, select{
+    font-size: 21px;
+    border-radius: 7px;
+}
+#adv{
+    background-color: #fde3b3;
+    padding: 20px;
+}

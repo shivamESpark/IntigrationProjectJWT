@@ -1,0 +1,170 @@
+select student_id, count(aid) as attended_days, sum(attendace)*100/count(attendace) as percentage from attendance where attendace = 1 and month(a_date) = 12 group by student_id;
+
+select count(aid) from attendance where group by student_id;
+
+
+
+
+select student_id, count(aid)/count(month(a_date)) from attendance where month(a_date) = 1 group by student_id;
+
+
+select student_id, truncate(sum(attendace)*100/count(attendace),2) as Percentage from attendance where month(a_date) = 12 group by student_id;
+select truncate(sum(attendace)*100/count(attendace),2) as Percentage from attendance where month(a_date) = 1 group by student_id;
+select truncate(sum(attendace)*100/count(attendace),2) as Percentage from attendance where month(a_date) = 2 group by student_id;
+
+
+select s.fname, a.truncate(sum(attendace)*100/count(attendace),2) as Percentage from attendace as a left join student2 as s;
+
+
+
+
+select student_id, sum(attendace) as adays, truncate(sum(attendace)*100/count(attendace),2) as percentage from attendance where month(a_date) = 12 and student_id in (select sid from student2) group by student_id;
+
+select a.student_id, s.fname, sum(a.attendace) as aday, truncate(sum(a.attendace)*100/count(a.attendace),2) as percentage 
+from attendance as a
+left join
+student2 as s on a.student_id = s.sid where month(a_date) = 12 group by a.student_id, s.fname;
+
+
+group by a.student_id;
+
+SELECT g.id, COUNT(t1.customernumber), SUM(sales) FROM customer_groups g LEFT JOIN transactions t1 ON t1.customernumber between g.from_customernumber and ;
+
+<% for(let i=0; i<result.length; i++){ %>
+                <tr> 
+                    <td><%= result[i].aid %></td>
+                    <td><%= result[i].student_id %></td>
+                    <td><%= result[i].a_date %></td>
+                    <td><%= result[i].attendace %></td>
+                </tr>
+            <% } %>
+
+
+
+select s.sid, f.student_id, f.subject_id, s.fname, f.marks_t_80, f.marks_p_20 from student2 as s join final_exam as f on s.sid = f.student_id limit 30; 
+
+// query for final_exam
+select s.sid, f.student_id, f.subject_id, b.subject_name, s.fname, f.marks_t_80, f.marks_p_20 from student2 as s join final_exam as f on s.sid = f.student_id right join subject_master as b on b.subject_id = f.subject_id order by s.sid;
+
+select s.sid as sid, s.fname as fname, s.lname as lname, b.subject_name as subject, f.marks_t_80 as tmarks, f.marks_p_20 as pmarks from student2 as s join final_exam as f on s.sid = f.student_id right join subject_master as b on b.subject_id = f.subject_id order by s.sid;
+
+
+
+// query for final exam
+select s.sid, t.student_id, t.subject_id, b.subject_name, s.fname, t.marks_t_40, t.marks_p_10 from student2 as s join terminal_exam as t on s.sid = t.student_id right join subject_master as b on b.subject_id = t.subject_id order by s.sid;
+select s.sid as sid, b.subject_name as subject, s.fname as fname, t.marks_t_40 as tmarks, t.marks_p_10 as pmarks from student2 as s join terminal_exam as t on s.sid = t.student_id right join subject_master as b on b.subject_id = t.subject_id order by s.sid;
+select s.sid as sid, s.fname as fname, s.lname as lname, sum(t.marks_t_40) as tmarks, sum(t.marks_p_10) as pmarks from student2 as s join terminal_exam as t on s.sid = t.student_id group by sid;
+
+// for interim_exam
+select s.sid, i.student_id, i.subject_id, b.subject_name, s.fname, i.marks_t_40, i.marks_p_10 from student2 as s join interim_exam as i on s.sid = i.student_id right join subject_master as b on b.subject_id = i.subject_id order by s.sid;
+
+select s.sid, i.student_id, i.subject_id, b.subject_name, s.fname, i.marks_t_40, i.marks_p_10 from student2 as s join interim_exam as i on s.sid = i.student_id right join subject_master as b on b.subject_id = i.subject_id order by s.sid;
+
+
+select s.sid, sum(i.marks_t_40) as imarks, sum(i.marks_p_10) as pimarks from student2 as s join interim_exam as i on s.sid = i.student_id group by sid;
+
+
+
+
+select s.sid as sid, s.fname as fname, s.lname as lname, sum(t.marks_t_40) as tmarks, sum(t.marks_p_10) as pmarks,
+sum(i.marks_t_40) as itmarks, sum(i.marks_p_10) as ipmarks,
+sum(f.marks_t_80) as ftmarks, sum(f.marks_p_20) as fpmarks
+from student2 as s join terminal_exam as t on t.student_id = s.sid
+join interim_exam as i on t.student_id = i.student_id 
+join final_exam as f on f.student_id = i.student_id group by s.sid;
+
+
+SELECT 
+    s.sid,
+    s.fname,
+    s.lname,
+    t.tmarks,
+    t.pmarks,
+    i.itmarks,
+    i.ipmarks,
+    f.ftmarks,
+    f.fpmarks
+FROM
+    student2 AS s
+        JOIN
+    (SELECT 
+        s.sid AS sid,
+            SUM(t.marks_t_40) AS tmarks,
+            SUM(t.marks_p_10) AS pmarks
+    FROM
+        student2 AS s
+    JOIN terminal_exam AS t ON t.student_id = s.sid
+    GROUP BY s.sid) AS t ON t.sid = s.sid
+        JOIN
+    (SELECT 
+        s.sid AS sid,
+            SUM(i.marks_t_40) AS itmarks,
+            SUM(i.marks_p_10) AS ipmarks
+    FROM
+        student2 AS s
+    JOIN interim_exam AS i ON s.sid = i.student_id
+    GROUP BY s.sid) AS i ON i.sid = s.sid
+        JOIN
+    (SELECT 
+        s.sid AS sid,
+            SUM(f.marks_t_80) AS ftmarks,
+            SUM(f.marks_p_20) AS fpmarks
+    FROM
+        student2 AS s
+    JOIN final_exam AS f ON f.student_id = s.sid
+    GROUP BY s.sid) AS f ON f.sid = s.sid
+GROUP BY s.sid;
+
+
+
+
+
+
+
+
+    <% for(let i=0; i<result.length; i++){ %>
+                    <tr>
+                        <td><%= result[i].student_id %></td>
+                        <td><%= result[i].fname %></td>
+                        <td><%= result[i].aday %></td>
+                        <td><%= result[i].percentage %></td>
+                        
+                    </tr>
+                <% } %>
+
+
+                 <div id="content">
+        <form method="get">
+            <label for="month">Months</label>
+            <select name="mn" id="month" onchange="submit()">
+                <% if(month == 12){ %>
+                    <option value="12" selected>December</option>
+                <% } else { %>
+                    <option value="12">December</option>
+                <% } %>
+
+                <% if(month == 1){ %>
+                    <option value="1" selected>January</option>
+                <% } else { %>
+                    <option value="1">January</option>
+                <% } %>
+
+                <% if(month == 2){ %>
+                    <option value="2" selected>February</option>
+                    <% } else { %>
+                    <option value="2">February</option>
+                <% } %>
+                <input type="hidden" value="<%= pid %>" name="pid">
+
+            </select>
+        </form>
+
+
+select s.subject_name as subject, s.subject_code as scode, t.marks_t_40 as ttmarks, t.marks_p_10 as tpmarks, i.marks_t_40 as itmarks, i.marks_p_10 as ipmarks, f.marks_t_80 as ftmarks, f.marks_p_20 as fpmarks 
+from final_exam as f
+join subject_master as s on s.subject_id = f.subject_id 
+JOIN
+terminal_exam as t on t.subject_id = f.subject_id
+JOIN 
+interim_exam as i on t.subject_id = i.subject_id where i.student_id = 1 unique; 
+${sid};
