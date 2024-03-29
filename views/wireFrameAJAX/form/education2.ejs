@@ -1,0 +1,70 @@
+<style>
+    #addRemove td p{
+        padding: 5px;
+        margin: 2px 5px;
+        border: 2px solid blue;
+        border-radius: 5px;
+    }
+    
+</style>
+<fieldset>
+    <legend>Education Details</legend>
+    <table id="tableEdu">
+            
+            <tr id="edu">
+                <td><input type="text" class="educationDetails eid" name="eid" id="eid" hidden></td>
+                <td><label for="course"> Course </label></td>
+                <td><input type="text" class="educationDetails eduDetails courseName" name="education[]" id="course"></td>
+                <td><label for="passYear"> Passing Year </label></td>
+                <td><input type="text" class="educationDetails eduDetails courseYear" name="educationYear[]" placeholder="YYYY" id="passYear"></td>
+                <td><label for="percentage"> Percentage </label></td>
+                <td><input type="text" class="educationDetails eduDetails coursePercentage" name="educationPercentage[]" id="percentage"></td>
+            </tr>
+            
+    </table>
+    <table>
+        <tr id="addRemove">
+            <td id="addEdu"><p>Add</p></td>
+            <td id="removeEdu"><p>Remove</p></td>
+        </tr>
+    </table>
+    
+    
+</fieldset>
+
+
+
+<script>
+    const add = document.getElementById("addEdu");
+    add.addEventListener("click", addRow);
+
+    const remove = document.getElementById("removeEdu");
+    remove.addEventListener("click", removeRow);
+
+    let ids = 1;
+
+    function addRow(){
+        const tableEdu = document.getElementById("tableEdu");
+        const row = document.getElementById("edu");
+        const newRow = row.cloneNode(true);
+        newRow.setAttribute("id", `edu${ids}`);
+        console.log(newRow)
+        ids+=1;
+        tableEdu.appendChild(newRow);
+    }
+
+    function removeRow(){
+        const tableEdu = document.getElementById("tableEdu");
+        console.log(tableEdu.children.length)
+        if(tableEdu.children.length < 2){
+            alert("no education row to delete!");
+            return 
+        }
+        ids -= 1;
+        const row = document.getElementById(`edu${ids}`);
+        tableEdu.removeChild(tableEdu.lastElementChild);
+    }   
+
+
+
+</script>

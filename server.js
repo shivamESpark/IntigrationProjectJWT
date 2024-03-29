@@ -70,6 +70,8 @@ app.use("/dynamicgrid", dynamicGried);
 const studentPageURL = require("./routes/studentSortingPagingURL/studentPaging");
 app.use("/studentURL", studentPageURL);
 
+const wireFrameAJAX = require("./routes/wireframeAJAX/wireframAJAX");
+app.use("/wireframeajax", wireFrameAJAX);
 
 app.get("/logout", authorization, (req, res)=>{
     return res.clearCookie("access_token").status(200).json({message:"successfully logout"});

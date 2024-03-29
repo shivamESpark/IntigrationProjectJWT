@@ -1,0 +1,90 @@
+<fieldset>
+    <legend>Basic Detail</legend>
+
+    <table>
+     <td>
+         <tr>
+            <input type="text" id="id" name="id" class="basicDetails" hidden>
+             <td><label for="fname">First Name </label></td> 
+             <td><input  type="text" id="fname" name="fname" class="basicdetails"></td> 
+             <!-- maxlength="30" minlength="1"  -->
+             
+             <td><label for="lname">Last Name</label></td>
+             <td><input type="text" id="lname" name="lname" class="basicdetails" ></td>
+             <!-- minlength="1" maxlength="30" -->
+         </tr>
+         
+         <tr>
+             <td><label for="designation">Designation</label></td>
+             <td><input type="text" id="designation" name="desingnation" class="basicdetails"></td>
+             <!-- minlength="2" maxlength="20" -->
+         </tr>
+         
+         <tr>
+             <td><label for="email">Email</label></td>
+             <td><input type="text" name="email" id="email" class="basicdetails"></td>
+             <!-- minlength="5" maxlength="50" -->
+             <td><label for="phone">Phone Number</label></td>
+             <td><input type="phone" name="phone" id="phone" class="basicdetails"></td>
+             <!-- minlength="4" maxlength="17" -->
+          </tr>
+         
+         <tr>
+             <td><label for="Gender">Gender</label></td>
+             <td>
+                 <input type="radio" name="gender" id="male" class="radioGen" value="M"  ><label for="male">Male</label>
+                 <input type="radio" name="gender" id="female" class="radioGen" value="F"><label for="female">Female</label>   
+                 <span id="radiogender"></span>    
+             </td>
+             <td><label for="dob">Date of Birth</label></td>
+             <td><input type="text" name="dob" class="basicdetails" id="dob" placeholder="YYYY-MM-DD"></td>
+             <!-- maxlength="11" -->
+         </tr>
+         
+         <tr>
+             <td><label for="relation">RalationShip Status</label></td>
+             <td>
+                 <select name="relation" name="relation" id="relation" class="combobox">
+                     <option value="0">Single</option>
+                     <option value="1">Married</option>
+                 </select>
+             </td>
+             <td><label for="city">City</label> </td>
+             <td><input type="text" name="city" id="city" class="basicdetails"></td>
+         </tr>
+     </td>   
+     <td>
+         <tr>
+             <td><label for="address1">Address 1</label> </td>
+             <td><input type="text"  name="address1" id="address1" class="basicdetails"></td>
+             <!-- maxlength="30" -->
+             <td><label for="address2">Address 2</label></td>
+             <td><input type="text" name="address2" id="address2" class="basicdetails"></td>
+             <!-- maxlength="30" -->
+         </tr>   
+         <tr>
+             <td><label for="zipcode">Zip Code</label></td>
+             <td><input type="zipcode" name="zipcode" id="zipcode" class="basicdetails"></td>
+             <!-- maxlength="10" -->
+             <td><label for="state">State</label></td>
+             <td>
+                 <select name="state" class="combobox" id="state">
+                     <optgroup label="west india">
+                         <option value="gj">Gujarat</option>
+                         <option value="mh">Maharastra</option>
+                         <option value="rj">Rajsthan</option>
+                     </optgroup>
+                     <optgroup label="north india">
+                         <option value="up">UP</option>
+                         <option value="pb">Punjab</option>
+                         <option value="uk">Uttrakhand</option>
+                     </optgroup>
+                 </select>
+             </td>
+             <td><span id="stateoption"></span></td>
+         </tr>    
+    </td>
+
+         
+</table>
+</fieldset>

@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+    <style>
+        #maindiv{
+            margin: 10px auto;            
+        }
+        #navs{
+            margin: 10px auto;
+            display: flex;
+            background-color: rgb(218, 245, 164);
+        }
+        #navs p, #navbtns p{
+            margin: 10px;
+            background-color: rgb(126, 206, 231);
+            padding: 5px;
+        }
+        #cdiv{
+            margin: 0 auto;
+        }
+        #navbtns{
+            display: flex;
+            margin: 10px;
+        }
+        fieldset{
+            width: fit-content;
+            margin: 20px 20px;
+       }
+      
+    </style>
+</head>
+<body>
+    <div id="maindiv">
+        <div id="cdiv">
+        <h1><%= locals.formType %> Employee Form</h1>
+        <!-- <div id="navs">
+            <p id="basicDetails">Basic Details</p>
+            <p id="education">Education</p>
+            <p id="langauge">language</p>
+            <p id="Technology">Technology</p>
+            <p id="workExperience">Work Experience</p>
+            <p id="references">References</p>
+            <p id="Prefences">Prefrences</p>
+        </div> -->
+
+        <form method="post" id="form1">
+        <!-- including components -->
+        
+        <div class="components" id="0">
+            <%- include("./form/basicDetails"); %>
+        </div>
+        
+        <div class="components" id="1">
+            <%- include("./form/education2"); %>
+        </div>
+
+        <div class="components" id="2">
+            <%- include("./form/languageKnown"); %>
+        </div>
+
+        <div class="components" id="3">
+            <%- include("./form/technologiesKnown"); %>
+        </div>
+        
+        <div class="components" id="4">
+            <%- include("./form/workExperience2"); %>
+        </div>
+        
+        <div class="components" id="5">
+            <%- include("./form/referenceContact") %>
+        </div>
+        <div class="components" id="6">
+            <%- include("./form/preference") %>
+        </div>
+    </div>
+    
+    
+    
+    <div id="navbtns">
+        <p id="previous">Previous</p>
+        <p id="next">Next</p>
+        <span id="errmsg"></span>
+    </div>
+</form>
+</div>
+</body>
+
+<%- include("functions.ejs"); %>
+
+
+
+<% if(locals.formType){ %>
+    <script>
+        // data global object
+        let data;
+    
+        // settig up radio button
+        function setRadio(className, indexArr = 0){
+            // radio button
+            const radios = document.getElementsByClassName(className);
+            for(let g of radios){
+                if(g.value == data[indexArr][0].gender){
+                    g.checked = true;
+                    break;
+                }
+            }
+        }
+    
+    
+        // set data function for basic details
+        function setData(Ids, dbValues){ 
+            Ids.forEach((id, index) => {
+                // console.log(index, id, dbValues[index]);
+                if(id == "gender"){
+                    setRadio("radioGen");
+                } else if( id == "dob"){
+                    // console.log(dbValues[index])
+                    document.getElementById(id).value = dbValues[index].split("T")[0];   
+                } else {
+                    document.getElementById(id).value = dbValues[index];
+                }
+            });
+        }
+        
+    
+        // fetching the data 
+        async function fetchDB(){
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            const id = urlParams.get("id");
+            const response = await fetch(`http://localhost:8080/wireframeajax/db/?id=${id}`);
+            data = await response.json();   
+            
+            console.log(data)
+            // console.log(data);
+    
+            // text box
+            // basic details 
+            const keyObjectBasicFields = Object.keys(data[0][0]);
+            // console.log(keyObjectBasicFields)
+            const valueBasicFields = Object.values(data[0][0]);
+            // console.log(valueBasicFields);
+
+            setData(keyObjectBasicFields, valueBasicFields);
+           
+    
+            
+            // education details text box 
+            let ids = 0;
+    
+            function addRow(){
+                const tableEdu = document.getElementById("tableEdu");
+                const row = document.getElementById("edu");
+                const newRow = row.cloneNode(true);
+    
+                newRow.setAttribute("id", `edu${ids}`);
+                const tds = newRow.children;
+                ids+=1;
+                tableEdu.appendChild(newRow);
+            }
+    
+            
+            const keyEducationFields = Object.keys(data[1]);
+            
+            data[1].forEach((element, index)=>{
+                const trs1 = document.getElementById(`course`).value = element.course ;
+                document.getElementById("eid").value = element.eid;
+                document.getElementById("course").value = element.course;
+                document.getElementById("passYear").value = element.passing_year;
+                document.getElementById("percentage").value = element.percentage;
+    
+                addRow();
+            })
+            tableEdu.firstElementChild.setAttribute("hidden", "true");
+            
+            
+    
+            
+            
+    
+            // work
+            // const addWorkRow = document.getElementById("addWorkBtn");
+            // addWorkRow.addEventListener("click", addWork)
+    
+            // const removeWorkRow = document.getElementById("removeWorkBtn");
+            // removeWorkRow.addEventListener("click", removeRowWork);
+    
+            let idsWork = 1;
+    
+            function addWork(){
+                const tableWorkExp = document.getElementById("tableExperience");
+                const row = document.getElementById("addWork");
+                const newRow = row.cloneNode(true);
+                newRow.setAttribute("id", `addWork${idsWork}`);
+                // console.log(newRow)
+                idsWork+=1;
+                tableWorkExp.appendChild(newRow);
+            }
+    
+            function removeRowWork(){
+                const tableWorkExp = document.getElementById("tableExperience");
+                // console.log(tableWorkExp.children.length)
+                if(tableWorkExp.children.length < 2){
+                    alert("no education row to delete!");
+                    return;
+                }
+                idsWork -= 1;
+                const row = document.getElementById(`edu${idsWork}`);
+                tableWorkExp.removeChild(tableWorkExp.lastElementChild);
+            }
+    
+    
+    
+            const tableWorkExp = document.getElementById("tableExperience");
+    
+            data[4].forEach((element, index)=>{                
+                const trs1 = document.getElementById(`companyName`).value = element.company ;
+                document.getElementById("wid").value = element.wid;
+                console.log(element.wid)
+                document.getElementById("desingationExp1").value = element.desingation;
+                // let from_date = element.from_date.split("T")[0];
+                document.getElementById("fromExpDate1").value = element.from_date.split("T")[0];
+                document.getElementById("toExpDate1").value = element.to_date.split("T")[0];
+                // console.log(data[4])
+    
+                addWork();
+            });
+            tableWorkExp.firstElementChild.setAttribute("hidden", "true");
+            
+            
+            // references 
+            // ref1
+            document.getElementById("rid1").value = data[5][0].rid;
+            document.getElementById("name").value = data[5][0].rfname;
+            document.getElementById("phone2").value = data[5][0].refphone;
+            document.getElementById("relation1").value = data[5][0].relation;
+            // ref2
+            document.getElementById("rid2").value = data[5][1].rid;
+            document.getElementById("name2").value = data[5][1].rfname;
+            document.getElementById("phone3").value = data[5][1].refphone;
+            document.getElementById("relation2").value = data[5][1].relation;
+    
+    
+            // preferences 
+            document.getElementById("expected_ctc").value = data[6][0].expected_ctc;
+            document.getElementById("actual_ctc").value = data[6][0].current_ctc;
+            document.getElementById("notice_period").value = data[6][0].notice_period;
+            
+            
+            
+            
+            // setting up the combobox data
+            function setDataCombo(domId, condtion){
+                const elements = document.getElementById(domId).children;
+                for(let e of elements){
+                    if(e.value == condtion){
+                        e.selected = true;
+                        break;
+                    } 
+                }
+            }
+            
+            
+            setDataCombo("dept", data[6][0].department);
+            setDataCombo("pref_location", data[6][0].location);
+            setDataCombo("relation", data[0][0].rel_ismarried)
+    
+        // languages 
+            // hindi
+            const hindi = document.getElementById("hindi");
+            const rwsh = document.getElementsByClassName("rwsh");
+    
+            // english
+            const english = document.getElementById("english");
+            const rwse = document.getElementsByClassName("rwse");
+    
+            // gujarati
+            const gujarati = document.getElementById("gujarati");
+            const rwsg = document.getElementsByClassName("rwsg");  
+    
+            function setCheckedData(index = 0, languageID, readID, writeID, speakID, dbId){
+                data[2].forEach((lang, i)=>{
+                    
+                    // console.log(languageID, lang.lang_name, lang.lread, lang.lwrite, lang.lspeak);
+                    if(lang.lang_name == languageID && (lang.lread == 1 || lang.lwrite == 1 || lang.lspeak == 1)){
+                        document.getElementById(dbId).value = lang.lid;
+                        document.getElementById(languageID).checked = true;
+                        
+                        if(lang.lread == 1){
+                            // console.log(languageID, lang.lread);
+                            document.getElementById(readID).checked = true;
+                            document.getElementById(readID).disabled = false;
+                        }
+                        if(lang.lwrite == 1){
+                            // console.log(languageID, lang.lwrite)
+                            document.getElementById(writeID).checked = true;
+                            document.getElementById(writeID).disabled = false;
+                        }
+                        if(lang.lspeak == 1){
+                            // console.log(languageID, lang.lspeak)
+                            document.getElementById(speakID).checked = true;
+                            document.getElementById(speakID).disabled = false;
+                        }
+                    }
+                })
+            }
+    
+            setCheckedData(2, "hindi", "read_h", "write_h", "speak_h", "lidhindi");
+            setCheckedData(2, "english", "read_e", "write_e", "speak_e", "lidenglish");
+            setCheckedData(2, "gujarati", "read_g", "write_g", "speak_g", "lidgujarati");
+    
+    
+    
+            // technology
+            function technoEdit(technology, sBigginer, sMediator, sExpert, dbId){
+    
+                data[3].forEach((tech, index)=>{
+                    
+                    
+                    if(tech.technology_name == technology){
+                        document.getElementById(technology).checked = true;
+                        document.getElementById(dbId).value = tech.tid;
+                        if(tech.status == "begginer" || tech.status == 0){
+                            document.getElementById(sBigginer).checked = true;
+                            document.getElementById(sBigginer).disabled = false;
+                        }
+                        if(tech.status == "mediator" || tech.status == 1){
+                            document.getElementById(sMediator).checked = true;
+                            document.getElementById(sMediator).disabled = false;
+                        }
+                        if(tech.status == "expert" || tech.status == 2){
+                            document.getElementById(sExpert).checked = true;
+                            document.getElementById(sExpert).disabled = false;
+                        }
+                    }
+                });    
+            }
+    
+            technoEdit("php", "begginer_php", "mideator_php", "expert_php", "tidphp");
+            technoEdit("python" ,"begginer_py", "medeator_py", "expert_py", "tidpy");
+            technoEdit("java" ,"begginer_java", "mediator_java", "expert_java", "tidjv");
+    
+    
+    
+            // optgroup function
+            function optGroupCheck(id, param2Condtion ){
+                const countryDiv = document.getElementById(id).children;
+                    for(let states of countryDiv){
+                        for(let s of states.children){
+                            if(s.value == param2Condtion){
+                                s.selected = true;
+                            } 
+                        }
+                    }
+                }
+                
+            
+            optGroupCheck("state", data[0][0].state);
+        }
+        fetchDB()
+    </script>
+    
+    <% } %>
+
+</html>

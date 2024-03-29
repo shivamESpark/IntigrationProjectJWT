@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        #showTable thead th{
+            background-color: rgb(127, 255, 138);
+            padding: 10px;  
+        }
+        #showTable tr td{
+            background-color: rgb(127, 240, 255);
+            text-align: center;
+            padding: 10px;
+        }
+        #showTable tr td a{
+            text-decoration: none;
+            color: blue;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <h1>ALL USERS</h1>
+        <h4><a href="http://localhost:8080/wireframeajax/addData">Add Users</a></h4>
+        <table id="showTable">
+            <thead>
+                <th>First Name</th>
+                <th>Last Name</th>  
+                <th>Email</th>
+                <th>Phone</th>
+                <th>City</th>
+                <th>Update</th>
+            </thead>
+        </table>
+    </center>
+</body>
+</html>
+
+<script>
+    function setData(Ids, dbValues){ 
+        const tables = document.getElementById("showTable");
+
+        Ids.forEach((id, index) => {
+            // console.log(id, dbValues[index])
+            const trs = document.createElement("tr");
+            const tds1 = document.createElement("td");
+            const tds2 = document.createElement("td");
+            const tds3 = document.createElement("td");
+            const tds4 = document.createElement("td");
+            const tds5 = document.createElement("td");
+            const tds6 = document.createElement("td");
+
+            const fname = document.createElement("p");
+            const lname = document.createElement("p");
+            const email = document.createElement("p");
+            const phone = document.createElement("p");
+            const city = document.createElement("p");
+            // const update = document.createElement("p");
+            const updateA = document.createElement("a");
+            updateA.setAttribute("href", `http://localhost:8080/wireframeajax/update/?id=${dbValues[index].id}`);
+
+            tds1.appendChild(fname);
+            tds2.appendChild(lname);
+            tds3.appendChild(email);
+            tds4.appendChild(phone);
+            tds5.appendChild(city);
+            tds6.appendChild(updateA);
+
+            trs.appendChild(tds1);
+            trs.appendChild(tds2);
+            trs.appendChild(tds3);
+            trs.appendChild(tds4);
+            trs.appendChild(tds5);
+            trs.appendChild(tds6);
+            tables.appendChild(trs);
+
+            fname.innerHTML = dbValues[index].first_name;
+            lname.innerHTML = dbValues[index].last_name;
+            email.innerHTML = dbValues[index].email;
+            phone.innerHTML = dbValues[index].phone;
+            city.innerHTML = dbValues[index].city;
+
+            updateA.innerHTML = "update";
+            // update.style.color = "blue"
+            // const upID = document.getElementById(dbValues[index].id)
+            // upID.addEventListener("click", ()=>{
+            //     console.log("HELLO", dbValues[index].id);
+            //     updatePage(dbValues[index].id)
+                
+            // });
+
+            // if(id == "gender"){
+
+            // } else if( id == "dob"){
+            //     // console.log(dbValues[index])
+            //     // document.getElementById(id).value = dbValues[index].split("T")[0];   
+            // } else {
+            //     // document.getElementById(id).value = dbValues[index];
+            // }
+        });
+    }
+    
+    function updatePage(userId){
+        let links = `http://localhost:8080/wireframeajax/update/?id=${userId}`
+        console.log(links);
+    }
+
+    async function fetchDB(){
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            const id = urlParams.get("id");
+            const response = await fetch(`http://localhost:8080/wireframeajax/db/?id=${id}`);
+
+            data = await response.json(); 
+            
+            
+            // text box
+            // basic details 
+            const keyObjectBasicFields = Object.keys(data[7]);
+            // console.log(keyObjectBasicFields)
+            const valueBasicFields = Object.values(data[7]);
+            // console.log(valueBasicFields);
+            setData(keyObjectBasicFields, valueBasicFields);
+    }
+    fetchDB();
+</script>
