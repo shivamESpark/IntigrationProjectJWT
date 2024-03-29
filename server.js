@@ -65,19 +65,19 @@ const delimeterSearch = require("./routes/delimeterSearch/delimeterSearch");
 app.use("/delimetersearch", authorization, delimeterSearch);
 
 const dynamicGried = require("./routes/dynamicGrid/dynamicGrid");
-app.use("/dynamicgrid", dynamicGried);
+app.use("/dynamicgrid", authorization, dynamicGried);
 
 const studentPageURL = require("./routes/studentSortingPagingURL/studentPaging");
-app.use("/studentURL", studentPageURL);
+app.use("/studentURL", authorization, studentPageURL);
 
 const wireFrameAJAX = require("./routes/wireframeAJAX/wireframAJAX");
-app.use("/wireframeajax", wireFrameAJAX);
+app.use("/wireframeajax", authorization, wireFrameAJAX);
 
 const studentResult = require("./routes/studentResult/studentResult");
-app.use("/studentresult", studentResult);
+app.use("/studentresult", authorization, studentResult);
 
 const timezone = require("./routes/timezone/timezone");
-app.use("/timezone", timezone);
+app.use("/timezone", authorization, timezone);
 
 
 app.get("/logout", authorization, (req, res)=>{
