@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login User</title>
+    <style>
+        #mn{
+            width: 300px;
+            margin: 0 auto;
+        }
+        #singin, #singup{
+            background-color: blue;
+            border-radius: 7px;
+            text-align: center;
+            color: white;
+            padding: 5px;
+            margin: 5px;
+        }
+        #btn{
+            display: flex;  
+        }
+    </style>
+</head>
+<body>
+    <div id="mn">
+        <h1>Login</h1>
+        <form method="post">
+            <table>
+                <tr>
+                    <td><label for="email">Email</label></td>
+                    <td><input type="email" name="email"></td>
+                </tr>
+                <tr>
+
+                </tr>
+                    <td><label for="password">Password</label></td>
+                    <td><input type="password" id="password" name="password"></td>
+                </tr>
+            </table>
+            <div id="btn">
+                <p id="singin">Sing In</p>
+                <p id="singup">Sing Up</p>
+            </div>
+        </form>
+    
+        <p id="message" hidden></p>
+
+    </div>
+</body>
+</html>
+<script>
+    const singins = document.querySelector("#singin");
+    const singups = document.querySelector("#singup");
+    const message = document.getElementById("message");
+
+    singins.addEventListener("click", singin);
+    singups.addEventListener("click", singup);
+
+
+    function objCreation(){
+        let formEntries = new FormData(document.querySelector("form"));
+        const obj = {}
+        formEntries.forEach((values, keys)=>{
+            if(obj[keys] != undefined){
+                obj[keys] += `,${values}`;
+            } else {
+                obj[keys] = values;
+            }
+        });
+        return obj;
+    }
+
+    async function singin(){
+        console.log("hello")
+        const response = await fetch("http://localhost:8080/login", {
+            method : "post",
+            body : JSON.stringify(objCreation()),
+            headers : {
+                'Content-Type': 'application/json'
+            }
+        });
+        const data = await response.json();
+        console.log(data)
+        
+        if(response.status == 500){
+            message.hidden = false;
+            message.innerHTML = data.message;
+        }
+
+        if(response.status == 201){
+            message.hidden = false;
+            message.innerHTML = data.message;
+        }
+
+        if(response.status == 203){
+            message.hidden = false;
+            message.innerHTML = data.message;
+        }
+
+        if(response.status == 300){
+            message.hidden = false;
+            message.innerHTML = data.message;
+        }
+
+        if(response.status == 200){
+            message.hidden = false;
+            window.location = data.link;
+        }
+    }
+
+
+    function singup(){
+        window.location = "http://localhost:8080/";
+    }
+</script>
