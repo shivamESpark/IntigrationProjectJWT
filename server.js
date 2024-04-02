@@ -73,11 +73,22 @@ app.use("/studentURL", authorization, studentPageURL);
 const wireFrameAJAX = require("./routes/wireframeAJAX/wireframAJAX");
 app.use("/wireframeajax", authorization, wireFrameAJAX);
 
+const wireframCRUD = require("./routes/wireframeCRUD/wireframCRUD");
+app.use("/wireframecrud", authorization, wireframCRUD);
+
 const studentResult = require("./routes/studentResult/studentResult");
 app.use("/studentresult", authorization, studentResult);
 
 const timezone = require("./routes/timezone/timezone");
 app.use("/timezone", authorization, timezone);
+
+
+const dynamicComponent = require("./routes/dynamicComponent/dynamicComponent");
+app.use("/component", authorization, dynamicComponent);
+
+
+const frontPagePagination = require("./routes/frontEndPagination/frontEndPagination");
+app.use("/frontendpagination", authorization, frontPagePagination);
 
 
 app.get("/logout", authorization, (req, res)=>{

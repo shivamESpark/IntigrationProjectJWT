@@ -1,0 +1,544 @@
+<script>
+// languages
+const hindi = document.getElementById("hindi");
+hindi.addEventListener("click", checkLanguage);
+  
+
+const english = document.getElementById("english");
+english.addEventListener("click", checkLanguage);
+
+const gujarati = document.getElementById("gujarati");
+gujarati.addEventListener("click", checkLanguage);
+
+
+function isCheck(lang, rws){
+
+      if(lang.checked){
+          
+          for(let i=0; i<rws.length; i++){
+              rws[i].disabled = false;
+          }
+      } else{
+          for(let i=0; i<rws.length; i++){
+              rws[i].disabled = true;
+              rws[i].value = 0;
+          }    
+      }    
+  }
+
+function checkLanguage(){
+      const rwsh = document.getElementsByClassName("rwsh");
+      const rwse = document.getElementsByClassName("rwse");
+      const rwsg = document.getElementsByClassName("rwsg");
+
+      isCheck(english, rwse);
+      isCheck(hindi, rwsh);
+      isCheck(gujarati, rwsg);
+
+
+  }
+
+
+// technologies
+const php = document.getElementById("php");
+php.addEventListener("click", checkTechnology);
+
+const py = document.getElementById("python");
+py.addEventListener("click", checkTechnology);
+
+const java = document.getElementById("java");
+java.addEventListener("click", checkTechnology);
+
+function checkTechnology(){
+  const bmephp = document.getElementsByClassName("bmephp");
+  const bmepy = document.getElementsByClassName("bmepy");
+  const bmejv = document.getElementsByClassName("bmejv");
+
+  isCheck(php, bmephp);
+  isCheck(py, bmepy);
+  isCheck(java, bmejv);
+}
+
+
+
+
+
+function validate(){
+        
+        function whiteSpaceRemove(str){
+            return str.trim();
+        }
+
+        function numberCheck(str) {
+            return !isNaN(str)
+            
+        }
+
+        function minLengthCheck(str, n=1){
+            return str.length < n;
+        }
+
+        function maxLengthCheck(str, n=30){
+            return str.length > n;
+        }
+
+        function checkYear(fieldId){
+            const yearId = document.getElementById(fieldId);
+            const year = yearId.value;
+
+            if(year > 0 && numberCheck(year) && year.length == 4){
+                return true;
+            } else {
+                return false;
+            }
+        }
+       
+        function percentageCheck(id){
+            val = document.getElementById(id).value;
+            if (isNaN(val) || val < 0 || val > 100) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+        
+
+
+        // require validation 
+        function requireValidation(className){
+            
+            const basicInputs = document.getElementsByClassName(className);
+            function emptyCheckFlag(){
+                let emptyFlag = false;
+                for(let b of basicInputs){
+                    if(b.value == "" || b.value == undefined || b.value == null){    
+                        let id = b.id;
+                        document.getElementById(b.id).style.border = "1.5px solid red";
+                        emptyFlag = true;
+                    } else {
+                        document.getElementById(b.id).style.border = "";
+                    }
+                }
+                return emptyFlag;
+            }
+    
+    
+            if(emptyCheckFlag()){
+                const errmsg = document.getElementById("errmsg");
+                errmsg.style.color = "red";
+                errmsg.style.fontWeight = "bold";
+                errmsg.style.fontSize = "16px";
+                errmsg.innerHTML = "Empty Field Is Not Valid! Check With Red Boreder!";
+            } else {
+                errmsg.innerHTML = "";
+                return true;
+            }
+            return false;
+        }
+
+
+
+        
+        function valueValidation(FieldId, minLen, maxLen){
+
+            if(FieldId == null || FieldId == undefined){
+                return false;
+            }
+            
+            const fieldValue = document.getElementById(FieldId).value;
+            console.log(fieldValue)
+
+
+            const fValue = whiteSpaceRemove(fieldValue);
+            console.log("trmvalue=", fValue);
+
+            if(minLengthCheck(fValue, minLen)){
+                console.log("min check false")
+                return false;
+            } else{
+                console.log("min true");
+            }
+            
+
+            if(maxLengthCheck(fValue, maxLen)){
+                console.log("max check false")
+                return false;
+            }else{
+                console.log("max true");
+            }
+            
+            if(FieldId == "phone" || FieldId == "phone2" || FieldId == "phone3" || FieldId == "zipcode" || FieldId == "expected_ctc" || FieldId == "actual_ctc"){
+                if(!numberCheck(fValue)){
+                    console.log("phone or zip num check failed");
+                    return false;
+                } else{
+                    console.log(" phone or zip num true");
+                }    
+            } else {
+
+                if(numberCheck(fValue)){
+                    console.log("num chekc failed");
+                    return false;
+                } else{
+                    console.log("num true");
+                }
+            }
+            return true;
+        }
+        
+
+        // radio check
+        function checkRadio(nameAttr){
+            let radiosBtn = document.getElementsByClassName("radioGen");
+            // console.log(radiosBtn)
+            for(let i=0; i<radiosBtn.length; i++){
+                if(radiosBtn[i].checked){
+                    // console.log("checked=++++++", radiosBtn[i],radiosBtn[i].checked);
+                    let err = document.getElementById("radiogender");
+                    err.innerHTML = "";
+                    return true;
+                } 
+            } 
+
+            let err = document.getElementById("radiogender");
+            err.innerHTML = "select a gender";
+            err.style.color = "red";
+            err.style.fontSize = "14px";
+        
+            return false;
+        }
+        
+
+        // checkbox check
+        function checkCheckbox(nameAttr){
+            let checkBox = document.getElementsByClassName("checkBoxGen");
+            for(let i=0; i<checkBox.length; i++){
+                if(checkBox[i].checked && checkBox[i].name == nameAttr){
+                    console.log("checkBox: ",checkBox[i]);
+                    return true;
+                } else {
+                    console.log("check failed");
+                    return false;
+                }
+            }
+        }
+
+
+      
+        
+
+
+        // validate select /combobox
+        function checkCombobox(){
+            let checkFlagOpt = false;
+            let checkFlagOp = true;
+
+            let checkCombo = document.getElementsByClassName("combobox");
+
+            for(let i=0; i<checkCombo.length; i++){
+                let childrens = checkCombo[i].children;
+                for(let child of childrens){
+                    if(child.getElementsByTagName("option").length > 1){
+                        let options = child.getElementsByTagName("option");
+                        for(op of options){
+                            if(op.selected){
+                                // console.log("child of child executed")
+                                checkFlagOpt = true; 
+                                break;
+                            }
+                        }
+                    }
+                    if(child.selected){
+                        // console.log("child=>");
+                        checkFlagOp = true;
+                    } 
+                }
+
+                if(checkFlagOp && checkFlagOpt){
+                    return true;
+                }
+            }
+        }
+
+        // checkCombobox2
+        function checkCombobox(FieldId){
+            let checkFlagOpt = false;
+            let checkFlagOp = false;
+
+            let checkCombo = document.getElementById(FieldId);
+
+    
+            for(let child of checkCombo){
+                console.log(child);
+                if(child.selected){        
+                    checkFlagOp = true;
+                } 
+            }
+            
+
+            if(checkFlagOp && checkFlagOpt){
+                return true;
+            }
+        }
+        
+        
+
+
+
+        // email check
+        function checkEmail() {
+            var email = document.getElementById('email');
+            var filter = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            if (!filter.test(email.value)) {
+                email.style.color = "red";
+                alert('Please provide a valid email address');
+                // email.focus;
+                console.log("email false");
+                return false;
+            } else {
+                email.style.color = "black";
+                console.log("email true");
+                return true;
+                
+            }
+        }
+
+
+
+
+        function checkDate(fieldId) {
+            // field id
+            console.log(fieldId);
+            let date = document.getElementById(fieldId).value;
+            console.log("date",date);
+
+            // Date format: YYYY-MM-DD
+            var datePattern = /^([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/;
+
+            // Check if the date string format is a match
+            var matchArray = date.match(datePattern);
+            if (matchArray == null) {
+                return false;
+            }
+
+            // Remove any non digit characters
+            var dateString = date.replace(/\D/g, ''); 
+
+            // Parse integer values from the date string
+            var year = parseInt(dateString.substr(0, 4));
+            var month = parseInt(dateString.substr(4, 2));
+            var day = parseInt(dateString.substr(6, 2));
+        
+            // Define the number of days per month
+            var daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+            // Leap years
+            if (year % 400 == 0 || (year % 100 != 0 && year % 4 == 0)) {
+                daysInMonth[1] = 29;
+            }
+
+            if (month < 1 || month > 12 || day < 1 || day > daysInMonth[month - 1]) {
+                return false;
+            }
+            return true;
+        }
+        
+        
+        // basic details 
+
+        function basicField(){
+            if(requireValidation("basicdetails")){
+                // value check for fname, lname, desg, city, add1, add2
+                function basicfieldValidation(){
+                    if(
+                        valueValidation("fname", 1, 30) &&
+                        valueValidation("lname",1, 30) && 
+                        valueValidation("designation", 1, 30) && 
+                        valueValidation("address1",1, 50) && 
+                        valueValidation("address2", 1, 50) && 
+                        valueValidation("city",1,20) &&
+                        valueValidation("phone", 4, 17) &&
+                        valueValidation("zipcode", 6,8) &&
+                        checkRadio("gender") &&
+                        checkCombobox() &&
+                        checkDate("dob") &&
+                        checkEmail()
+                    ) {
+                        console.log("basic Field checked");
+                        return true;
+                    } else {
+                        console.log("basic field failed");
+                        return false;
+                    }
+                }
+                
+                if(basicfieldValidation()){
+                    return true;
+                } else {
+                    return false;
+                }
+                
+            } else {
+                console.log("require validation failed");
+                return false;
+            }
+
+        }
+
+
+        
+        // education
+        function education(){
+            if(requireValidation("educationDetails")){
+                function educationvalidation(){
+                    const courseName = document.getElementsByClassName("courseName");
+                    const couseYear = document.getElementsByClassName("courseYear");
+                    const coursePer = document.getElementsByClassName("coursePercentage");
+                    
+                    const arrCourse = [];
+                    const arrCYear = [];
+                    const arrCPercentage = [];
+                    courseName.forEach((element, index) => {
+                        courseName.push(element.id);
+                        arrCYear.push(couseYear[index].id);
+                        arrCPercentage.push(coursePer[index].id);
+                    });
+    
+                    // console.log(arrCourse);
+                    // console.log(arrCYear);
+                    // console.log(arrCPercentage);
+                    // if(
+                        
+                    // ){
+                    //     // console.log("eagle");
+                    //     return true;
+                    // } else {
+                    //     // console.log("false");
+                    //     return false;
+                    // }
+                }
+                
+                if(educationvalidation()){
+                    console.log("education check");
+                    return true;
+                } else {
+                    console.log("education failed")
+                    return false;
+                }
+            } else {
+                console.log("education detailed failed!");
+                return false;
+            }      
+        }
+        
+        // work experience
+
+        function workExpericeDetail(){
+            if(requireValidation("workExperience")){
+                function workExperice(){
+                    if(
+                        valueValidation("company_name1", 3, 30) &&
+                        valueValidation("company_name2", 3, 30) &&
+                        valueValidation("company_name3", 3, 30) &&
+                        valueValidation("desingation_exp1", 1, 30) &&
+                        valueValidation("desingation_exp2", 1, 30) &&
+                        valueValidation("desingation_exp3", 1, 30) &&
+                        checkDate("from_exp_date1") &&
+                        checkDate("to_exp_date1") &&
+                        checkDate("from_exp_date2") &&
+                        checkDate("to_exp_date2") &&
+                        checkDate("from_exp_date3") &&
+                        checkDate("to_exp_date3")
+                    ){
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }   
+    
+                if(workExperice()){
+                    console.log("workExperince checked");
+                    return true;
+                } else {
+                    console.log("workExperince Failed");
+                    return false;
+                }
+            }  else {
+                console.log("workSxperince detailed failed!");
+                return false;
+            }     
+        }
+
+
+        // references 
+        function references(){
+            if(requireValidation("references")){
+                function referencesCheck(){
+                    if(
+                        valueValidation("name") &&
+                        valueValidation("name2") &&
+                        valueValidation("phone2", 4, 18) &&
+                        valueValidation("phone3", 4, 18) &&
+                        valueValidation("relation1") &&
+                        valueValidation("relation2")
+                    ){
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+                if(referencesCheck()){
+                    console.log("references checked");
+                    return true;
+                } else {
+                    console.log("references Failed");
+                    return false;
+                }
+            } else {
+                console.log("references detailed failed!");
+                return false;
+            }   
+        }
+
+
+        // preferences 
+        function preference(){
+            if(requireValidation("preferences")){
+                function preferenceCheck(){
+                    if(
+                        valueValidation("expected_ctc") &&
+                        valueValidation("actual_ctc") &&
+                        checkCombobox()
+                    ){
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+                if(preferenceCheck()){
+                    console.log("preference checked");
+                    return true;
+                } else {
+                    console.log("preference Failed");
+                    return false;
+                }
+            }
+        }
+
+
+        
+
+        // if(basicField() && education() && workExpericeDetail() && references() && preference()) {
+            // console.log("all Check ok");
+            // return true;
+        // } else {
+            // return false;
+        //     console.log("failed somewhere");
+        // }
+    }
+
+
+
+
+
+</script>

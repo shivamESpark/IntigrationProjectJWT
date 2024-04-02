@@ -1,0 +1,44 @@
+
+<fieldset>
+    <legend>Prefences</legend>
+    <table>
+        <tr>
+            <td><label for="pref_location">Prefered Location</label></td>
+            <td>
+                <select name="pref_location" id="pref_location">
+                    <option value="ahmd">Ahmedabad</option>
+                    <option value="rjt" selected>Rajkot</option>
+                    <option value="mumbai">Mumbai</option>
+                    <option value="texas">Texas</option>
+                </select>
+            </td>
+            <td><label for="notice_period">Notice Period</label></td>
+            <td><input type="text" id="notice_period" class="pref" name="notice_period" ></td>
+            <td><label for="department">Department</label></td>
+            <td>
+                <select name="dept" id="dept">
+                    <option value="desing">Desing</option>
+                    <option value="development">Development</option>
+                    <option value="marketing">marketing</option>
+                    <option value="account">account</option>
+                    <option value="hr">Human Resource</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td><label for="expected_ctc">Expected CTC</label></td>
+            <td><input type="text"  class="preferences combobox pref" id="expected_ctc" name="expected_ctc" tabindex="2"></td>
+            <td></td>
+        </tr>
+ 
+        <tr>
+            <td></td>
+            <td><input type="color" hidden></td>
+            <td><label for="actual_ctc">Actual CTC</label></td>
+            <td><input type="text"  class="preferences combobox pref" id="actual_ctc" name="actual_ctc" tabindex="1"></td>
+            <td></td>
+     </tr> 
+    </table>
+</fieldset>

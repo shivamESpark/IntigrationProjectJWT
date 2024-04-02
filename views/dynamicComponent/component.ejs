@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>wireframe component</title>
+</head>
+<body>
+    <center>
+
+        
+            <form method="get">
+                <input type="text" name="comp" id="comp">
+                <input type="submit" name="submit">
+            </form>
+        
+        <table>
+
+
+        
+
+        <% if (locals.field != undefined || locals.field != null || locals.result !=null || locals.result != undefined ||  !locals.error){ %>
+            <tr>
+                <% if( result[0].type == "radio" && result[0].unique_name == "gender1"){ %>      
+                    <td><label for="<%= result[0] %>"><%=result[0].field_name%>: </label></td>
+                    <% for(let i=0; i<=result.length-1; i++){ %>
+                        <td><input type="<%= result[i].type %>" name="<%=result[0].unique_name%>" id="<%= result[0].unique_name %>"><%= result[i].option_value %></td>
+                    <% } %>            
+                <% } %>
+            </tr>
+
+            <br>
+
+                
+            <tr>
+            <td>
+                <% if( result[0].type == "combo" && result[0].unique_name == "relation2"){ %>      
+                    <label for="<%= result[0].unique_name %>"><%=result[0].field_name%></label>
+                    <select id="<%= result[0].unique_name %>" name="<%= result[0].unique_name %>">
+                        <% for(let i=0; i<=result.length-1; i++){ %>
+                            <option value="<%= result[i].option_value %>"><%= result[i].option_key%></option>   
+                        <% } %>            
+                    </select>
+            
+                <% } %>                        
+            </td>    
+            </tr>
+
+
+            <tr>
+                <% if( result[0].type == "combo" && result[0].unique_name == "state3"){ %>
+                    <label for="<%= result[0].unique_name %>"><%=result[0].field_name%>: </label>
+                    <select id="<%= result[0].unique_name %>" name="<%= result[0].unique_name %>">
+                        <% for(let i=0; i<=result.length-1; i++){ %>
+                            <option value="<%= result[i].option_value %>"><%= result[i].option_key%></option>
+                        <% } %>            
+                    </select>
+                <% } %>      
+            </tr>
+
+
+
+
+            <tr>
+                <% if( result[0].type == "checkbox" && result[0].unique_name == "language4"){ %>      
+                    <td><label for="<%= result[0] %>"><%=result[0].field_name%>: </label></td>
+                    <% for(let i=0; i<=result.length-1; i++){ %>
+                        <td><input type="<%= result[i].type %>" id="<%= result[i].unique_name %>"><%= result[i].option_value %></td>
+                    <% } %>            
+                <% } %>
+            </tr>
+
+
+
+
+            <tr>
+                <% if( result[0].type == "checkbox" && result[0].unique_name == "technology5"){ %>      
+                    <td><label for="<%= result[0] %>"><%=result[0].field_name%>: </label></td>
+                    <% for(let i=0; i<=result.length-1; i++){ %>
+                        <td><input type="<%= result[i].type %>" id="<%= result[i].unique_name %>"><%= result[i].option_value %></td>
+                    <% } %>            
+                <% } %>
+            </tr>
+        <% } %>
+
+
+                                  
+
+                                              
+
+                                            
+
+                    
+
+
+                   
+                
+    </table>
+    </center>
+</body>
+</html>

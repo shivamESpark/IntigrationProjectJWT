@@ -1,0 +1,322 @@
+<script>
+
+
+const titles = document.getElementsByClassName("title");
+
+const row = document.getElementById('row');
+
+const id = document.getElementById("id");
+const slug = document.getElementById("slug");
+const title = document.getElementById("title")
+const content = document.getElementById("content");
+const image = document.getElementById("image");
+const status = document.getElementById("status");
+const category = document.getElementById("category");
+const publish = document.getElementById("publish");
+const updated = document.getElementById("updated");
+const table = document.getElementById("table");
+const theads = document.getElementById("heads");
+const details = document.getElementById("detail");
+
+
+console.log(details);
+
+// for pagination
+let first = document.getElementById("first");
+let back = document.getElementById("back");
+let last = document.getElementById("last");
+let next = document.getElementById("next");
+let pageNo = document.getElementById("pageNo");
+let fdetailId;
+
+// const arrFetchedData = [];
+
+
+first.addEventListener("click", ()=>{
+    pno = 1 ;
+    pageNo.innerHTML = pno;
+    fetchData();
+});
+
+back.addEventListener("click", ()=>{
+    pno = pageNo.innerHTML;
+    if(pno < 2){
+        alert("there is no previous page!")
+        return;
+    }
+    pno = parseInt(pno) - 1;
+    pageNo.innerHTML = pno;
+    fetchData();
+});
+
+
+next.addEventListener("click", ()=>{
+    pno = pageNo.innerHTML;
+    if(pno > 9){
+        alert("cannot move to next page!")
+        return;
+    }
+    pno = parseInt(pno) + 1;
+    pageNo.innerHTML = pno;
+    fetchData();
+});
+
+last.addEventListener("click", ()=>{
+    pno = 10 ;
+    pageNo.innerHTML = pno;
+    fetchData();
+});
+
+
+
+
+
+// getting the id 
+const query = window.location.search;
+const urlparams = new URLSearchParams(query);
+const sid = urlparams.get("id");
+const url = `https://jsonplaceholder.org/posts/${sid}`;
+
+
+function emptyRow(){
+    table.innerHTML = "";
+}
+
+
+
+
+function fetchComment(cid){
+    // const curl = `https://jsonplaceholder.org/comments/${cid}`
+    const curl = "https://jsonplaceholder.org/comments/";
+    fetch(curl)
+        .then((response)=>{
+            if(response.status >= 200 && response.status < 300){
+                return response.json();
+            } else{
+                throw new Error("Something Went Wrong!");
+            }
+        })
+        .then((data)=>{
+
+            const cmtI = document.getElementById("commentI");
+            console.log(data)
+            // if(data.userId = cid){
+            
+                comment = data;
+                for(let i=0; i<data.length; i++){
+                    console.log(data.postId == id)
+                    if(data[i].userId == cid){
+                        // console.log(data[i].postId)
+                        // console.log(data[i].comment)
+                        // console.log("len = ", data[i].userId.length)
+                        cmtI.innerHTML = data[i].comment;
+                    }
+                }
+            // }    
+            
+            
+        })
+}
+
+function fetchDetail(fdetailId, pno){
+    emptyRow();
+    if(fetchDetail != undefined){
+        fetch(`https://jsonplaceholder.org/posts/${fdetailId}`)
+        .then((response)=>{
+            if(response.status >= 200 && response.status < 300){
+                return response.json();
+            } else{
+                throw new Error("Something Went Wrong!");
+            }
+        })
+        .then((data)=>{  
+        
+            const hdHead = document.createElement("thead")
+            const hdId = document.createElement("th");
+            const hdtitle = document.createElement("th");
+            const hdContent = document.createElement("th");
+            const hdStatus = document.createElement("th");
+            const hdUser = document.createElement("th");
+            const hdImage = document.createElement("th");
+            const hdComment = document.createElement("th");
+            const hdBack = document.createElement("th");
+
+
+            hdHead.appendChild(hdId);
+            hdHead.appendChild(hdtitle);
+            hdHead.appendChild(hdContent);
+            hdHead.appendChild(hdStatus);
+            hdHead.appendChild(hdUser);
+            hdHead.appendChild(hdImage);
+            hdHead.appendChild(hdComment);
+            hdHead.appendChild(hdBack);
+            table.appendChild(hdHead);
+
+            hdId.innerHTML = "ID";
+            hdtitle.innerHTML = "Title";
+            hdContent.innerHTML = "Content";
+            hdStatus.innerHTML = "Status";
+            hdUser.innerHTML = "UserID";
+            hdImage.innerHTML = "Image";
+            hdComment.innerHTML = "Comment";
+            hdBack.innerHTML = "Back";
+
+
+            // createing content
+            const newrow = document.createElement("tr");
+            const ncId = document.createElement("td");
+            const nctitle = document.createElement("td");
+            const nccontent = document.createElement("td");
+            const ncstatus = document.createElement("td");
+            const ncuserid = document.createElement("td");
+
+            // image
+            const ncimg = document.createElement("td");
+            const img = document.createElement("img");
+            img.src = data.thumbnail;
+
+            // back 
+            const ncfetch = document.createElement("td");
+            const backfetch = document.createElement("h4");
+            ncfetch.appendChild(backfetch);
+            backfetch.style.background = "green";
+            backfetch.style.color = "white"
+            backfetch.style.border = "2px solid green";
+            backfetch.style.padding = "3px";
+            backfetch.style.borderRadius = "5px";
+            backfetch.setAttribute("onclick", "fetchData()");
+
+            // for comment
+            const nccomment = document.createElement("td");                    
+            const comment = document.createElement("h4");
+            comment.style.background = "blue";
+            comment.style.color = "white";
+            comment.style.border = "2px solid blue";
+            comment.style.padding = "3px";
+            comment.style.borderRadius = "5px";
+            nccomment.appendChild(comment);
+            comment.setAttribute("id", "commentI");
+            comment.setAttribute("onclick", `fetchComment(${data.id})`);
+            
+            
+
+            newrow.appendChild(ncId);
+            newrow.appendChild(nctitle);
+            newrow.appendChild(nccontent);
+            newrow.appendChild(ncstatus);
+            newrow.appendChild(ncuserid);
+            ncimg.appendChild(img);
+            newrow.appendChild(ncimg);
+            // for comment section
+            newrow.appendChild(nccomment);
+            newrow.appendChild(ncfetch);
+            table.appendChild(newrow);
+            
+
+            backfetch.innerHTML = "Back";
+            comment.innerHTML = "Comment";
+            ncId.innerHTML = data.id;
+            nctitle.innerHTML = data.title;
+            nccontent.innerHTML = data.content;
+            ncstatus.innerHTML = data.status;
+            ncuserid.innerHTML = data.userId;
+            
+        })
+    
+    }
+}
+
+function fetchSearch(){
+        const urlParams = new URLSearchParams(window.location.search);
+        let id = urlParams.get("id");
+        let allData = []
+        fetch("https://jsonplaceholder.org/posts")
+        .then((response)=>{
+            response.json();
+        })
+        .then((data)=>{
+            console.log(data)           ;
+        })
+}
+
+function fetchData(){
+    emptyRow();
+    
+    fetch("https://jsonplaceholder.org/posts")
+    
+    .then((response)=>{
+        if(response.status >= 200 && response.status < 300){
+            return response.json();
+        } else{
+            throw new Error("Something Went Wrong!");
+        }
+    })
+    .then((data)=>{
+
+        
+
+        pno = pageNo.innerHTML;
+    
+        data = data.slice(((parseInt(pno)-1)*10), ((parseInt(pno)-1)*10)+10);
+
+        const theads = document.createElement("thead");
+        theads.setAttribute("id", "heads");
+        // console.log(theads)
+        const thId = document.createElement("th");
+        const thSlug = document.createElement("th");
+        const thTitle = document.createElement("th");
+        const thStatus = document.createElement("th");
+        const thCategory = document.createElement("th");
+        const thPublish = document.createElement("th");
+        const thUpdate = document.createElement("th");
+        const thDetail = document.createElement("th");
+
+        theads.appendChild(thId);
+        theads.appendChild(thSlug);
+        theads.appendChild(thTitle);
+        theads.appendChild(thStatus);
+        theads.appendChild(thCategory);
+        theads.appendChild(thPublish);
+        theads.appendChild(thUpdate);
+        theads.appendChild(thDetail);
+
+        table.appendChild(theads)
+ 
+        thId.innerHTML = "ID";
+        thSlug.innerHTML = "Slug";
+        thTitle.innerHTML = "Title";
+        thStatus.innerHTML = "Status";
+        thCategory.innerHTML = "Category";
+        thPublish.innerHTML = "Published At";
+        thUpdate.innerHTML = "Updated At";
+        thDetail.innerHTML = "Details";
+        
+        
+
+        for(let i=0; i<data.length; i++){
+            const cloned = row.cloneNode(true);
+            table.appendChild(cloned);
+            cloned.children.id.innerHTML = data[i].id;
+            cloned.children.slug.innerHTML = data[i].slug;
+            cloned.children.title.innerHTML = data[i].title;
+            cloned.children.status.innerHTML = data[i].status;
+            cloned.children.category.innerHTML = data[i].category;
+            cloned.children.publish.innerHTML = data[i].publishedAt;
+            cloned.children.updated.innerHTML = data[i].updatedAt;
+            cloned.children.detail.addEventListener("click", ()=>{
+                fdetailId = data[i].id;
+                
+                fetchDetail(fdetailId, pno);
+            });
+        }
+    })
+    .catch((error)=>{
+        console.log(error);
+    })
+}
+
+fetchData()
+
+
+
+</script>

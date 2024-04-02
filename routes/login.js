@@ -56,14 +56,13 @@ routes.post("/", async (req, res)=>{
     
             const passwordMd5 = md5(saltDB + password);
             if(passwordMd5 == passwordDB){
-                const token = jwt.sign({ email :email }, process.env.JWT_SECRET_KEY);
+                const token = jwt.sign({ email :email }, process.env.JWT_SECRET_KEY, { expiresIn: '24h' });
         
                 return res.cookie("access_token", token, {
                     httpOnly: true,
                     secure: process.env.NODE_ENV === "production",
                 }).status(200).json({message : "logged in succesfuly", link:"http://localhost:8080/home"});       
                 
-
             } else {
                 
                 res.status(203).json({message:"username or password is wrong!"});

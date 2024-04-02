@@ -1,0 +1,64 @@
+<fieldset>
+    <legend>Work Experience</legend>
+    <table id="tableExperience">
+        <tr id="addWork">
+                <td><input type="text" id="wid" name="wid" class="workExperience" hidden> </td>
+                <td><label for="companyName"> Company Name </label></td>
+                <td><input type="text" id="companyName" name="company[]" class="workExperience workE"> </td>
+                <td><label for="desingationExp1"> Desingation </label></td>
+                <td><input type="text" id="desingationExp1" name="designation[]" class="workExperience workE"></td>
+                <td><label for="fromExpDate1"> From </label></td>
+                <td><input type="text"  class="workExperience workE" name="fromdate[]" id="fromExpDate1"></td>
+                <td><label for="toExpDate1"> To </label></td>
+                <td><input type="text"  class="workExperience workE" id="toExpDate1" name="enddate[]"></td>
+        </tr>
+    </table>
+    <table>
+        <tr id="addRemove">
+            <td id="addWorkBtn"><p>Add</p></td>
+            <td id="removeWorkBtn"><p>Remove</p></td>
+        </tr>
+    </table>
+</fieldset>
+
+
+<script>
+
+    
+const addWorkRow = document.getElementById("addWorkBtn");
+        addWorkRow.addEventListener("click", addWork)
+
+        const removeWorkRow = document.getElementById("removeWorkBtn");
+        removeWorkRow.addEventListener("click", removeRowWork);
+
+        let idsWork = 1;
+
+        function addWork(){
+            const tableWorkExp = document.getElementById("tableExperience");
+            const row = document.getElementById("addWork");
+            const newRow = row.cloneNode(true);
+            newRow.setAttribute("id", `addWork${idsWork}`);
+            // console.log(newRow)
+            idsWork+=1;
+            tableWorkExp.appendChild(newRow);
+        }
+
+        function removeRowWork(){
+            const tableWorkExp = document.getElementById("tableExperience");
+            // console.log(tableWorkExp.children.length)
+            if(tableWorkExp.children.length < 2){
+                alert("no work experience row to delete!");
+                return;
+            }
+            idsWork -= 1;
+            const row = document.getElementById(`edu${idsWork}`);
+            tableWorkExp.removeChild(tableWorkExp.lastElementChild);
+            
+        }
+
+
+
+        // const tableWorkExp = document.getElementById("tableExperience");
+
+
+</script>
