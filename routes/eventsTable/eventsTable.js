@@ -3,8 +3,7 @@ const routes  = express.Router();
 
 
 // for the dynamic table intigration
-routes.get("/", (req, res)=>{
-    res.render("./eventsTable/eventsTable");
-})
+const eventsTabel = require("../../controller/eventTable/eventTable");
+routes.get("/", eventsTabel.eventTable);
 
 module.exports = routes;

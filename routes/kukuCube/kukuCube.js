@@ -3,8 +3,7 @@ const routes  = express.Router();
 
 
 // for the dynamic table intigration
-routes.get("/", (req, res)=>{
-    res.render("./kukuCube/kukuCube");
-})
+const kukuCube = require("../../controller/kukuCube/kukuCube");
+routes.get("/", kukuCube.kukuCube);
 
 module.exports = routes;

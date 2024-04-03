@@ -3,8 +3,7 @@ const routes  = express.Router();
 
 
 // for the dynamic table intigration
-routes.get("/", (req, res)=>{
-    res.render("./frontEndPagination/frontendpagination");
-})
+const frontEndPagination = require("../../controller/frontEndPagination/frontEndPagination");
+routes.get("/", frontEndPagination.frontEndPagination);
 
 module.exports = routes;

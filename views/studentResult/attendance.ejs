@@ -86,36 +86,36 @@
         <table>
             <thead>
 
-                <% function changeSign(pid, month, field, order, arrow){ %>
+                <% function changeSign(pid, month, field, order, arrow, color){ %>
                     <% pid = 1 %>
-                    <th><a href="/studentresult/<%= pid %>/<%= month %>/?field=<%= `${field}` %>&order=<%= `${order}` %>"><%= field %><span><i class="<%=` ${arrow} `%>"></i></span></a></th>
+                    <th><a href="/studentresult/<%= pid %>/<%= month %>/?field=<%= `${field}` %>&order=<%= `${order}` %>"><%= field %><span ><br><i style="border-color: <%= color %>" class="<%=`  ${arrow} `%>"></i></span></a></th>
 
                 <% } %>
 
                 <% if(order == "desc" && field=="student_id"){ %>
-                    <% changeSign(pid, month, "student_id", "asc", "arrow down") %>
+                    <% changeSign(pid, month, "student_id", "asc", "arrow down", "red") %>
                 <% } else { %>
-                    <% changeSign(pid, month, "student_id", "desc", "arrow up") %>                    
+                    <% changeSign(pid, month, "student_id", "desc", "arrow up", "blue") %>                    
                 <% } %> 
                 
-                <% if(order == "desc" && field == "s.name"){ %>
-                    <% changeSign(pid, month, 's.fname', "asc", "arrow down") %>
+                <% if(order == "desc" && field == "s.fname"){ %>
+                    <% changeSign(pid, month, 's.fname', "asc", "arrow down", "red") %>
                 <% } else { %>
-                    <% changeSign(pid, month, "s.fname", "desc", "arrow up") %>                    
+                    <% changeSign(pid, month, "s.fname", "desc", "arrow up", "blue") %>                    
                 <% } %> 
                 
 
                 <% if(order == "desc" && field == "aday"){ %>
-                    <% changeSign(pid, month, "aday", "asc", "arrow down") %>                    
+                    <% changeSign(pid, month, "aday", "asc", "arrow down", "red") %>                    
                 <% } else { %>
-                    <% changeSign(pid, month, "aday", "desc", "arrow up") %>                   
+                    <% changeSign(pid, month, "aday", "desc", "arrow up", "blue") %>                   
                     
                 <% } %>
 
                 <% if(order == "desc" && field == "percentage"){ %>
-                    <% changeSign(pid, month, "percentage", "asc", "arrow down") %>                    
+                    <% changeSign(pid, month, "percentage", "asc", "arrow down", "red") %>                    
                 <% } else { %>
-                    <% changeSign(pid, month, "percentage", "desc", "arrow up") %>                    
+                    <% changeSign(pid, month, "percentage", "desc", "arrow up", "blue") %>                    
                 <% } %>
             </thead>
             <tbody>
