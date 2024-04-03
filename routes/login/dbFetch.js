@@ -1,5 +1,5 @@
 const express = require("express");
-const con = require("../dbHandler/dbConnect");
+const con = require("../../dbHandler/dbConnect");
 
 const routes = express();
 

@@ -1,7 +1,7 @@
 const express = require("express");
 const routes = express.Router();
 const md5 = require("md5");
-const { dbConnect } = require("../dbHandler/dbConnect");
+const { dbConnect } = require("../../dbHandler/dbConnect");
 const con = dbConnect();
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
@@ -12,7 +12,7 @@ const jwt = require("jsonwebtoken");
 
 
 routes.get("/", (req, res) => {
-    res.render("login");
+    res.render("./login/login");
 });
 
 

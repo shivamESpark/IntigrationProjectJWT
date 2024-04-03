@@ -1,6 +1,6 @@
 const express = require("express");
 const routes = express.Router();
-const {dbConnect} = require("../dbHandler/dbConnect");
+const {dbConnect} = require("../../dbHandler/dbConnect");
 const con = dbConnect();
 
 
@@ -47,7 +47,7 @@ const insertUser = (fname, lname, email, dob, gender, alink) => {
 
 function passwordRoute(alink){
     routes.get(`/authentication/:${alink}`, (req, res)=>{
-        res.render("createPassword");
+        res.render("./login/createPassword");
     })
 }
 

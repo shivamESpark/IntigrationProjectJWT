@@ -1,7 +1,6 @@
 const express = require("express");
 const app = express();
 
-const bycrpt = require("bcrypt");
 const {dbConnect} = require("./dbHandler/dbConnect");
 const con = dbConnect();
 const md5 = require("md5");
@@ -14,17 +13,6 @@ app.use(cookieParcer());
 app.use(express.json());
 
 
-app.get("/", (req, res)=>{
-    res.render("index");    
-});
-
-const addUser = require("./routes/auth");
-app.use("/addUser", addUser);
-
-const createPass = require("./routes/createPassword");
-app.use("/loginpass", createPass);
-
-// jwt
 const authorization = (req, res, next) => {
     const token = req.cookies["access_token"];
     if(!token){
@@ -40,12 +28,24 @@ const authorization = (req, res, next) => {
     }
 };
 
-const login = require("./routes/login");
+
+
+app.get("/", (req, res)=>{
+    res.render("index");    
+});
+
+const addUser = require("./routes/login/auth");   
+app.use("/addUser", addUser);
+
+const createPass = require("./routes/login/createPassword");
+app.use("/loginpass", createPass);
+
+const login = require("./routes/login/login");
 app.use("/login", login);
 
 
 app.get("/home", authorization, (req, res)=>{
-    res.render("home");
+    res.render("./login/home");
 });
 
 
@@ -91,15 +91,15 @@ const frontPagePagination = require("./routes/frontEndPagination/frontEndPaginat
 app.use("/frontendpagination", authorization, frontPagePagination);
 
 
+// for logout
 app.get("/logout", authorization, (req, res)=>{
-    return res.clearCookie("access_token").status(200).json({message:"successfully logout"});
-})
-
-
-
-
+    return res.clearCookie("access_token").status(200).render("login.ejs");
+});
 
 
 
 
 app.listen(8080)
+
+
+

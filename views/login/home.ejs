@@ -41,12 +41,32 @@
         .menus a:hover{
             color: rgb(92, 47, 230);
         }
+
+        #logouta{
+            padding: 5px;
+            text-align: center;
+            text-decoration: none;
+            color:white;
+            font-weight: bold;
+        }
+        #logout{
+            background-color: black;
+            padding: 7px;
+            border-radius: 7px;
+        }
+        #logoutbtn{
+            margin: 0 auto;
+            width: 70px;
+        }
+
     </style>
 </head>
 <body>
     <div id="main">
         <h1>Home</h1>
-        <p>Logged in</p>
+        <div id="logoutbtn">
+            <a id="logouta" href="http://localhost:8080/logout"> <p id="logout">Logout</p></a>
+        </div>
 
         <div id="dynamic" class="menus">
             <p>Dynamic Tables</p>

@@ -1,7 +1,7 @@
 const express = require("express");
 const routes = express.Router();
 const md5 = require("md5");
-const { dbConnect } = require("../dbHandler/dbConnect");
+const { dbConnect } = require("../../dbHandler/dbConnect");
 const con = dbConnect();
 const jwt = require("jsonwebtoken");
 const url = require("url");
@@ -43,26 +43,33 @@ routes.post("/", async (req, res) => {
     let salt = undefined;
     // console.log(req.body);
 
+    if(!(cPassword || rPassword)){
+        
+        res.status(300).json({message:"empty passoword not allowed"});
 
-    if(rPassword == cPassword){
-        try {
-            const result = await fetchSalt(alink);
-            salt = result[0].salt;
-            // console.log(result[0].salt + "   salt");
-        } catch (error) {
-            res.status(500).json({ messge: "error fetching salt" });
-            console.log("fetching salt error => " + error);
-        }
+    } else {
+        
+            if(rPassword == cPassword){
+                try {
+                    const result = await fetchSalt(alink);
+                    salt = result[0].salt;
+                    // console.log(result[0].salt + "   salt");
+                } catch (error) {
+                    res.status(500).json({ messge: "error fetching salt" });
+                    console.log("fetching salt error => " + error);
+                }
+        
+                try {
+                    const passwordMD5 = md5(salt + rPassword);
+                    result = await insertPassword(passwordMD5, alink);
+                    // console.log(passwordMD5, alink, salt)
+                    res.status(200).json({messge: "password has been set"});
+                } catch (error) {
+                    res.status(501).json({ messge: "error setting password" });
+                    console.log("setting password error = > " + error)
+                }
+            }
 
-        try {
-            const passwordMD5 = md5(salt + rPassword);
-            result = await insertPassword(passwordMD5, alink);
-            // console.log(passwordMD5, alink, salt)
-            res.status(200).json({messge: "password has been set"});
-        } catch (error) {
-            res.status(501).json({ messge: "error setting password" });
-            console.log("setting password error = > " + error)
-        }
     }
 
 
