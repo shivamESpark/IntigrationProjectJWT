@@ -93,7 +93,7 @@ app.use("/frontendpagination", authorization, frontPagePagination);
 
 // for logout
 app.get("/logout", authorization, (req, res)=>{
-    return res.clearCookie("access_token").status(200).render("login.ejs");
+    return res.clearCookie("access_token").status(200).render("./login/login.ejs");
 });
 
 

@@ -3,9 +3,7 @@ const con = require("../../dbHandler/dbConnect");
 
 const routes = express();
 
-routes.get("/", (req, res)=>{
-    const sqlI = "select * from users";
-    console.log(con);
-})
+const dbS = require("../../controller/login/dbFetch");
+routes.get("/", dbS.dbDatas);
 
 module.exports = routes
