@@ -16,6 +16,4 @@ routes.get('/update', wireFrameUpdate.updateG);
 routes.post('/update', wireFrameUpdate.updates);
 
 
-
-
 module.exports = routes;

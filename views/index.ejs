@@ -119,6 +119,17 @@
             message.innerHTML = data.message;
             message.hidden = false;
         }
+
+        if(response.status == 302){
+            message.innerHTML = data.message;
+            message.hidden = false;
+        }
+
+        if(response.status == 303){
+            message.hidden = false;
+            message.innerHTML = data.message;
+        }
+
         
         if(response.status == 201){
             message.innerHTML = data.message;

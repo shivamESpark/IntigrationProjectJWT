@@ -1,6 +1,7 @@
 const url = require("url");
 const bodyParser = require("body-parser");
 const {dbConnect} = require("../../dbHandler/dbConnect");
+const { copyFileSync } = require("fs");
 const con = dbConnect();
 
 
@@ -33,7 +34,7 @@ const addData = (req, res)=>{
 
     
     // education
-    // console.log(dt)
+    console.log(dt)
     let educationName = dt["education[]"].split(","); // arr
     let educationYear = dt["educationYear[]"].split(",") // arr
     let educationPercentage = dt["educationPercentage[]"].split(",") //arr
@@ -54,62 +55,32 @@ const addData = (req, res)=>{
     console.log(educationName, educationYear, educationPercentage);
     
 
-    // launguages known
-    let languages = dt["language[]"].split(",");
-    let read = dt["read[]"].split(",");
-    let write = dt['write[]'].split(",");
-    let speak = dt['speak[]'].split(",");
-    console.log("lang = ", languages,read, write, speak)
-    // if not array while returning single value
-    if(!Array.isArray(languages)){
-        languages = Array(languages)
-        // console.log("array")
-    }
-    if(!Array.isArray(read)){
-        read = Array(read);
-        // console.log("read arr")
-    }
-    if(!Array.isArray(write)){
-        write = Array(write);
-        // console.log("writearr") 
-    }
-    if(!Array.isArray(speak)){
-        speak = Array(speak);
-        // console.log("speak arr")
-    }
-
-    // while there is no field selected
-    if(languages[0] == undefined){
-        languages[0] = 'English';
-    }
-
-    // // console.log(languages)
-    // // console.log(read)
-    // // console.log(write)
-    // // console.log(speak)
 
     // technologies
+
     let technologies = dt["technologies[]"].split(",");
     let php = dt.php;
     let py = dt.python;
     let jv = dt.java;
-    console.log("technology = ", technologies, dt.php, dt.python, dt.java)
+    
+    console.log("technology = ", technologies, dt.php, dt.python, dt.java);
+
     if(!Array.isArray(technologies)){
         technologies = Array(technologies)
     }
-    if(!Array.isArray(php)){
-        php = Array(php)
-    }
-    if(!Array.isArray(py)){
-        py = Array(py)
-    }
-    if(!Array.isArray(jv)){
-        jv = Array(jv)
+    
+    
+    const statuss = [dt.php, dt.py, dt.jv];
+    const status = [];
+
+    for(let i=0; i<statuss.length; i++){
+        if(statuss[i]  !==  undefined){
+            status.push(statuss[i]);
+        }
     }
     
-    const status = [php, py, jv];
-    // console.log(status)
-    
+
+
     // work experience
     let company = dt["company[]"].split(",");
     let designationW = dt["designation[]"].split(",");
@@ -149,7 +120,45 @@ const addData = (req, res)=>{
     const actualCTC = dt.actual_ctc;
     const department = dt.dept;
 
+
+    // launguages known
+  
+    let languages = dt["language[]"].split(",");
     
+    let read = []
+    let speak = []
+    let write = []
+
+    for(let i=0; i<languages.length; i++){
+
+        if(dt[languages[i]+"_read"] == 1){
+            read.push(1)
+        } else {
+            read.push(0)
+        }
+        
+        if(dt[languages[i]+"_write"] == 1){
+            write.push(1)
+        } else {
+            write.push(0)
+        }
+
+        if(dt[languages[i]+"_speak"] == 1){
+            speak.push(1)
+        } else {
+            speak.push(0)
+        }
+
+    }
+    // console.log(read, "read")
+    // console.log(write, "write")
+    // console.log(speak, "speak")
+ 
+
+
+
+    
+ 
     
     
     const insertBasicDetails = `INSERT INTO basic_details (first_name, last_name, desingnation, address1, address2, email, city, phone, state, gender, rel_ismarried, dob, zipcode) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)`;
@@ -185,17 +194,17 @@ const addData = (req, res)=>{
                 }
             }
 
+        
             
+
+
             //language insertion
             const insertLanguage = `INSERT INTO language (basic_id, lang_name, lread, lwrite, lspeak) values(?,?,?,?,?)`;
             for(let i=0; i < languages.length; i++){
-                con.query(insertLanguage, [lastInsertedId ,languages[i], read[i] == undefined ? read[i] = 0 : read[i] = 1 , write[i] == undefined ? write[i] = 0 : write[i] = 1, speak[i] == undefined ? speak[i] = 0 : speak[i] = 1], (err, result)=>{
+                con.query(insertLanguage, [lastInsertedId ,languages[i], read[i], write[i], speak[i]], (err, result)=>{
                     if(err){
                         // res.send(err);
                         console.log("failed language" + err);
-
-                        // res.render("onFormSubmit", {message : "Failed :("});
-                        // res.end();
                         return;
                     } else {
                         console.log("language inserted");
@@ -209,6 +218,7 @@ const addData = (req, res)=>{
             const insertTechnologies = `insert into technology (basic_id, technology_name, status) values(?,?,?)`;
 
             for(let i=0; i<technologies.length; i++){
+                console.log("techon=>", [lastInsertedId, technologies[i], status[i]])
                 con.query(insertTechnologies, [lastInsertedId, technologies[i], status[i]], (err, result)=>{
                     if(err){
                         // res.send(err);

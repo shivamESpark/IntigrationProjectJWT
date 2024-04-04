@@ -73,8 +73,8 @@
             <<
             <
         <% } else { %>
-            <a href="/<%= field %>/<%= sort %>/<%= 1 %>"><<</a>
-            <a href="/<%= field %>/<%= sort %>/<%= +pid - 1 %>"><</a>
+            <a href="/studentURL/<%= field %>/<%= sort %>/<%= 1 %>"><<</a>
+            <a href="/studentURL/<%= field %>/<%= sort %>/<%= +pid - 1 %>"><</a>
     
         <% } %>
     
@@ -84,8 +84,8 @@
             >
             >>
         <% } else { %>
-            <a href="/<%= field %>/<%= sort %>/<%= +pid + 1 %>">></a>
-            <a href="/<%= field %>/<%= sort %>/<%= pid = 1000 %>">>></a>
+            <a href="/studentURL/<%= field %>/<%= sort %>/<%= +pid + 1 %>">></a>
+            <a href="/studentURL/<%= field %>/<%= sort %>/<%= pid = 1000 %>">>></a>
     
         <% } %>
       

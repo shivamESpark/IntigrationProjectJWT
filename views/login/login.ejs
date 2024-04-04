@@ -113,6 +113,13 @@
             message.innerHTML = data.message;
         }
 
+        if(response.status == 301){
+            message.hidden = false;
+            message.innerHTML = data.message;
+        }
+        
+
+
         if(response.status == 200){
             message.hidden = false;
             window.location = data.link;

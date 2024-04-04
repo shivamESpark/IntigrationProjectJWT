@@ -21,6 +21,7 @@ const studentPagination = (req, res)=>{
             console.log("connected --<=[]");
             console.log("fetching record");
             
+            
             con.query(`select * from student order by ${fieldname} ${sort} limit ${(+pid-1)*50},50`, (err, result, fields)=>{
                 if(!err){
                     res.render('./studentSortingPagingURL/page', {pid:pid, result:result, sort:sort, field:fieldname});

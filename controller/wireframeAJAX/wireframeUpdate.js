@@ -120,39 +120,38 @@ const updateData = (req, res) => {
     // update languages 
     let languages = dt["language[]"].split(",");
     let lid = dt.lid.split(",");
-    let read = dt["read[]"].split(",");
-    let write = dt['write[]'].split(",");
-    let speak = dt['speak[]'].split(",");
-    console.log("lang = ", languages,read, write, speak)
-    // if not array while returning single value
-    if(!Array.isArray(languages)){
-        languages = Array(languages)
-    }
-    if(!Array.isArray(lid)){
-        lid = Array(lid);
-    }
-    if(!Array.isArray(read)){
-        read = Array(read);
-    }
-    if(!Array.isArray(write)){
-        write = Array(write);
-    }
-    if(!Array.isArray(speak)){
-        speak = Array(speak);
-    }
+    
+    let read = []
+    let speak = []
+    let write = []
 
-    // while there is no field selected
-    if(languages[0] == undefined){
-        languages[0] = 'English';
+    for(let i=0; i<languages.length; i++){
+
+        if(dt[languages[i]+"_read"] == 1){
+            read.push(1)
+        } else {
+            read.push(0)
+        }
+        
+        if(dt[languages[i]+"_write"] == 1){
+            write.push(1)
+        } else {
+            write.push(0)
+        }
+
+        if(dt[languages[i]+"_speak"] == 1){
+            speak.push(1)
+        } else {
+            speak.push(0)
+        }
+
     }
-
-
     //language insertion
     const insertLanguage = `INSERT INTO language (basic_id, lang_name, lread, lwrite, lspeak) values(?,?,?,?,?)`;
     const updateLanguage = `update language set lang_name = ?, lread = ?, lwrite = ?, lspeak = ? where basic_id = ? and lang_name = ?`;
     
     for(let i=0; i < languages.length; i++){
-        if(lid[i] == undefined || lid[i] == "" || lid[i] == null){
+        if(lid[i] != undefined || lid[i] != "" || lid[i] != null){
             con.query(insertLanguage, [dt.id ,languages[i], read[i] == undefined ? read[i] = 0 : read[i] = 1 , write[i] == undefined ? write[i] = 0 : write[i] = 1, speak[i] == undefined ? speak[i] = 0 : speak[i] = 1], (err, result)=>{
                 if(err){
                     console.log("failed language" + err);
@@ -164,6 +163,7 @@ const updateData = (req, res) => {
 
         }
         con.query(updateLanguage, [languages[i], read[i] == undefined ? read[i] = 0 : read[i] = 1 , write[i] == undefined ? write[i] = 0 : write[i] = 1, speak[i] == undefined ? speak[i] = 0 : speak[i] = 1, dt.id, languages[i]], (err, result)=>{
+
             if(err){
                 console.log("failed language" + err);
                 return;
@@ -184,6 +184,9 @@ const updateData = (req, res) => {
     let py = dt.python;
     let jv = dt.java;
     let tid = dt.tid.split(",");
+
+
+
     console.log("technology = ", technologies, dt.php, dt.python, dt.java);
     
 
@@ -207,10 +210,11 @@ const updateData = (req, res) => {
 
     const insertTechnologies = `insert into technology (basic_id, technology_name, status) values(?,?,?)`;
     const updateTechnology = `update technology set technology_name = ?, status = ?  where basic_id = ? and technology_name = ?`;
-
+    
     for(let i=0; i<technologies.length; i++){
         console.log("tid" + tid[i])
         if(tid[i] == undefined || tid[i] == "" || tid[i] == null){
+            
             con.query(insertTechnologies, [dt.id, technologies[i], status[i]], (err, result)=>{
                 if(err){
                     console.log("failed Technologies");

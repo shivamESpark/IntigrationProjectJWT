@@ -22,7 +22,6 @@
         } else{
             for(let i=0; i<rws.length; i++){
                 rws[i].disabled = true;
-                rws[i].value = 0;
             }    
         }    
     }
@@ -326,6 +325,7 @@
             let formEntries = new FormData(document.querySelector("form"));
             let jObj = {};
             formEntries.forEach((values, keys)=>{
+                
                 if(jObj[keys] != undefined){
                     jObj[keys] += `,${values}`;
                 } else {
