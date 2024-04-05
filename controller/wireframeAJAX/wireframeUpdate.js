@@ -118,9 +118,23 @@ const updateData = (req, res) => {
     // education update over with existing field mistake
 
     // update languages 
-    let languages = dt["language[]"].split(",");
-    let lid = dt.lid.split(",");
+    let languages = dt["language[]"]
+    if(languages){
+        languages = dt["language[]"].split(",");
+    }
+    let lidD = dt.lid.split(",");
     
+
+
+    const lid = [];
+    
+    for(i=0; i<lidD.length; i++){
+     if(lidD[i]){
+            lid.push(lidD[i]);
+        }
+    }
+
+
     let read = []
     let speak = []
     let write = []
@@ -149,10 +163,16 @@ const updateData = (req, res) => {
     //language insertion
     const insertLanguage = `INSERT INTO language (basic_id, lang_name, lread, lwrite, lspeak) values(?,?,?,?,?)`;
     const updateLanguage = `update language set lang_name = ?, lread = ?, lwrite = ?, lspeak = ? where basic_id = ? and lang_name = ?`;
-    
+    const deleteLanguage = `delete language lang_name, lread, lwrite, lspeak where basic_id = ? and lang_name = ?`;
+
+
+
     for(let i=0; i < languages.length; i++){
-        if(lid[i] != undefined || lid[i] != "" || lid[i] != null){
-            con.query(insertLanguage, [dt.id ,languages[i], read[i] == undefined ? read[i] = 0 : read[i] = 1 , write[i] == undefined ? write[i] = 0 : write[i] = 1, speak[i] == undefined ? speak[i] = 0 : speak[i] = 1], (err, result)=>{
+        console.log("lid=>", lid[i])
+        if(!lid[i]){
+            console.log("lang => ", dt.id ,languages[i], read[i], write[i], speak[i]);  
+
+            con.query(insertLanguage, [dt.id ,languages[i], read[i], write[i], speak[i]], (err, result)=>{
                 if(err){
                     console.log("failed language" + err);
                     return;
@@ -162,13 +182,16 @@ const updateData = (req, res) => {
             });
 
         }
-        con.query(updateLanguage, [languages[i], read[i] == undefined ? read[i] = 0 : read[i] = 1 , write[i] == undefined ? write[i] = 0 : write[i] = 1, speak[i] == undefined ? speak[i] = 0 : speak[i] = 1, dt.id, languages[i]], (err, result)=>{
+
+ 
+
+        con.query(updateLanguage, [languages[i], read[i], write[i], speak[i], dt.id, languages[i] ,], (err, result)=>{
 
             if(err){
                 console.log("failed language" + err);
                 return;
             } else {
-                    console.log("language updated");
+                console.log("language updated");
             }
         });
     }
@@ -183,38 +206,37 @@ const updateData = (req, res) => {
     let php = dt.php;
     let py = dt.python;
     let jv = dt.java;
-    let tid = dt.tid.split(",");
+    let tidD = dt.tid.split(",");
 
 
 
-    console.log("technology = ", technologies, dt.php, dt.python, dt.java);
+    // console.log("technology = ", technologies, dt.php, dt.python, dt.java);
     
 
-    if(!Array.isArray(tid)){
-        tid = Array(tid)
-    }
-    if(!Array.isArray(technologies)){
-        technologies = Array(technologies)
-    }
-    if(!Array.isArray(php)){
-        php = Array(php)
-    }
-    if(!Array.isArray(py)){
-        py = Array(py)
-    }
-    if(!Array.isArray(jv)){
-        jv = Array(jv)
+    const statuses = [php, py, jv];
+    const status = [];
+    for(i=0; i<statuses.length; i++){
+        if(statuses[i]){
+            status.push(statuses[i]);
+        }
     }
     
-    const status = [php, py, jv];
+    const tid = [];
+    
+    for(i=0; i<tidD.length; i++){
+     if(tidD[i]){
+            tid.push(tidD[i]);
+        }
+    }
+    
 
     const insertTechnologies = `insert into technology (basic_id, technology_name, status) values(?,?,?)`;
     const updateTechnology = `update technology set technology_name = ?, status = ?  where basic_id = ? and technology_name = ?`;
-    
+
+
     for(let i=0; i<technologies.length; i++){
-        console.log("tid" + tid[i])
-        if(tid[i] == undefined || tid[i] == "" || tid[i] == null){
-            
+        // console.log("tid=>", tid[i])
+        if(!tid[i]){
             con.query(insertTechnologies, [dt.id, technologies[i], status[i]], (err, result)=>{
                 if(err){
                     console.log("failed Technologies");
