@@ -6,7 +6,17 @@
     <title>Index</title>
     <style>
         #maindiv{
-            margin: 10px auto;            
+            margin: 10px auto;  
+            padding:20px;
+            border-radius: 7px;
+            width: 900px;          
+
+        }
+        fieldset{
+            background-color: rgb(194, 241, 249);
+            padding: 20px;
+            font-weight: bold;
+            border-radius: 7px;
         }
         #navs{
             margin: 10px auto;
@@ -14,9 +24,12 @@
             background-color: rgb(218, 245, 164);
         }
         #navs p, #navbtns p{
-            margin: 10px;
-            background-color: rgb(126, 206, 231);
-            padding: 5px;
+            margin: 10px;   
+            background-color: rgb(2, 110, 143);
+            color: white;
+            font-weight: bold;
+            padding: 7px;
+            border-radius: 7px;
         }
         #cdiv{
             margin: 0 auto;
@@ -25,67 +38,62 @@
             display: flex;
             margin: 10px;
         }
-        fieldset{
-            width: fit-content;
-            margin: 20px 20px;
-       }
+    
       
     </style>
 </head>
 <body>
     <div id="maindiv">
         <div id="cdiv">
-        <h1><%= locals.formType %> Employee Form</h1>
-        <!-- <div id="navs">
-            <p id="basicDetails">Basic Details</p>
-            <p id="education">Education</p>
-            <p id="langauge">language</p>
-            <p id="Technology">Technology</p>
-            <p id="workExperience">Work Experience</p>
-            <p id="references">References</p>
-            <p id="Prefences">Prefrences</p>
-        </div> -->
+            <h1><%= locals.formType %> Employee Form</h1>
+            <!-- <div id="navs">
+                <p id="basicDetails">Basic Details</p>
+                <p id="education">Education</p>
+                <p id="langauge">language</p>
+                <p id="Technology">Technology</p>
+                <p id="workExperience">Work Experience</p>
+                <p id="references">References</p>
+                <p id="Prefences">Prefrences</p>
+            </div> -->
 
-        <form method="post" id="form1">
-        <!-- including components -->
-        
-        <div class="components" id="0">
-            <%- include("./form/basicDetails"); %>
-        </div>
-        
-        <div class="components" id="1">
-            <%- include("./form/education2"); %>
-        </div>
+            <form method="post" id="form1">
+                <!-- including components -->
+                
+                <div class="components" id="0">
+                    <%- include("./form/basicDetails"); %>
+                </div>
+                
+                <div class="components" id="1">
+                    <%- include("./form/education2"); %>
+                </div>
 
-        <div class="components" id="2">
-            <%- include("./form/languageKnown"); %>
-        </div>
+                <div class="components" id="2">
+                    <%- include("./form/languageKnown"); %>
+                </div>
 
-        <div class="components" id="3">
-            <%- include("./form/technologiesKnown"); %>
-        </div>
-        
-        <div class="components" id="4">
-            <%- include("./form/workExperience2"); %>
-        </div>
-        
-        <div class="components" id="5">
-            <%- include("./form/referenceContact") %>
-        </div>
-        <div class="components" id="6">
-            <%- include("./form/preference") %>
+                <div class="components" id="3">
+                    <%- include("./form/technologiesKnown"); %>
+                </div>
+                
+                <div class="components" id="4">
+                    <%- include("./form/workExperience2"); %>
+                </div>
+                
+                <div class="components" id="5">
+                    <%- include("./form/referenceContact") %>
+                </div>
+                <div class="components" id="6">
+                    <%- include("./form/preference") %>
+                </div>
+            
+            </form>
+            <div id="navbtns">
+                <p id="previous">Previous</p>
+                <p id="next">Next</p>
+                <span id="errmsg"></span>
+            </div>
         </div>
     </div>
-    
-    
-    
-    <div id="navbtns">
-        <p id="previous">Previous</p>
-        <p id="next">Next</p>
-        <span id="errmsg"></span>
-    </div>
-</form>
-</div>
 </body>
 
 <%- include("functions.ejs"); %>

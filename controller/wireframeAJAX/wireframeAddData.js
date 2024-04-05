@@ -70,15 +70,16 @@ const addData = (req, res)=>{
     }
     
     
-    const statuss = [dt.php, dt.py, dt.jv];
+    const statuses = [php, py, jv];
     const status = [];
-
-    for(let i=0; i<statuss.length; i++){
-        if(statuss[i]  !==  undefined){
-            status.push(statuss[i]);
+    for(i=0; i<statuses.length; i++){
+        if(statuses[i]){
+            status.push(statuses[i]);
         }
     }
     
+    console.log("statues : ", statuses);
+    console.log("status: ", status);
 
 
     // work experience
