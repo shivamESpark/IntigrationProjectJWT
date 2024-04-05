@@ -13,26 +13,15 @@ app.use(cookieParcer());
 app.use(express.json());
 
 
-const authorization = (req, res, next) => {
-    const token = req.cookies["access_token"];
-    if(!token){
-        return res.sendStatus(403);
-    }
-    try{
-        const data = jwt.verify(token, process.env.JWT_SECRET_KEY);
-        req.userId = data.id;
-        req.userRole = data.role;
-        return next();
-    } catch {
-        return res.sendStatus(403);
-    }
-};
+const auth = require("./auth/auth");
+
+const authorization = auth.authentication;
 
 
 
-app.get("/", (req, res)=>{
-    res.render("index");    
-});
+const index = (req, res) => {
+    res.render("index");
+}
 
 const addUser = require("./routes/login/auth");   
 app.use("/addUser", addUser);

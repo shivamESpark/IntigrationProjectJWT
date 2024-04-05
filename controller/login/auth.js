@@ -123,6 +123,10 @@ const auth = async(req, res)=>{
                         result = await insertUser(fname, lname, email, dob, gender, alink);
                         // passwordRoute(alink);
                         req.params = {"link" : `authentication/:${alink}`}
+                        setTimeout(() => {
+                            req.params = {"link" : `authentication/:`}
+                        }, 10000);
+
                         res.status(200).json({message:"user registration successful", alink : `http://localhost:8080/addUser/authentication/:${alink}`});
                     } catch (error) {
                         console.log(error)

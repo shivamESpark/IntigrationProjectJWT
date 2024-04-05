@@ -58,74 +58,157 @@
             margin: 0 auto;
             width: 70px;
         }
-
+        #tables{
+            width: 910px;
+            font-weight: bold;
+        }
+        a{
+            text-decoration: none;
+            color: blue;
+        }
+   
+        tr:nth-child(2n){
+            background-color: aqua;
+        }
+        tr:nth-child(2n + 1){
+            background-color: rgb(255, 196, 164);
+        }
+        th{
+            padding: 15px;
+            font-weight: bold;
+            background-color: rgb(73, 225, 73);
+        }
     </style>
 </head>
 <body>
     <div id="main">
         <h1>Home</h1>
+        
+        
         <div id="logoutbtn">
             <a id="logouta" href="http://localhost:8080/logout"> <p id="logout">Logout</p></a>
         </div>
+        
+        <table id="tables">
 
-        <div id="dynamic" class="menus">
-            <p>Dynamic Tables</p>
-            <p><a href="http://localhost:8080/dynamic">Dynamic Table</a></p>
-        </div>
-        <div id="event" class="menus">
-            <p>Events Table Tables</p>
-            <p><a href="http://localhost:8080/events">Events Table</a></p>
-        </div>
-        <div id="kukucube" class="menus">
-            <p>KukuCube</p>
-            <p><a href="http://localhost:8080/kukucube">KUKU Cube</a></p>
-        </div>
-        <div id="tickTacToe" class="menus">
-            <p>Tick Tac Toe</p>
-            <p><a href="http://localhost:8080/tickTacToe">Tick-Tack-Toe</a></p>
-        </div>
-        <div id="delimetersearch" class="menus">
-            <p>Delimeter Search</p>
-            <p><a href="http://localhost:8080/delimetersearch">Delimeter Search</a></p>
-        </div>
-        <div id="dynamicgrid" class="menus">
-            <p>Dynamic Gried</p>
-            <p><a href="http://localhost:8080/dynamicgrid/1">Dynamic Gried</a></p>
-        </div>
-        <div id="wireframeajax" class="menus">
-            <p>Wireframe Ajax</p>
-            <p><a href="http://localhost:8080/wireframeajax">Wire Frame AJAX</a></p>
-        </div>
-        <div id="wireframecrud" class="menus">
-            <p>Wireframe CRUD</p>
-            <p><a href="http://localhost:8080/wireframecrud">Wire Frame CRUD</a></p>
-        </div>
-        <div id="studentURL" class="menus">
-            <p>Student URL</p>
-            <p><a href="http://localhost:8080/studentURL/fname/asc/1">studentURL</a></p>
-        </div>
-        <div id="studentresult" class="menus">
-            <p>Student Attendance</p>
-            <p><a href="http://localhost:8080/studentresult/1/12">student Attendance</a></p>
-        </div>
-        <div id="result" class="menus">
-            <p>Student Result</p>
-            <p><a href="http://localhost:8080/studentresult/result?pid=1">student result detailed</a></p>
-        </div>
-        <div id="timezone" class="menus">
-            <p>TimeZones</p>
-            <p><a href="http://localhost:8080/timezone">Timezones</a></p>
-        </div>
-        <div id="dynamiccomponent" class="menus">
-            <p>Dynamic Component</p>
-            <p><a href="http://localhost:8080/component/?comp=state&submit=Submit">Dynamic Component</a></p>
-        </div>
+        <thead>
+            <th>Work Done Name</th>
+            <th>Select To Navigate</th>
+        </thead>
+        <tr>
+            <td>
+                <p>Dynamic Tables</p>
+            </td>
+            <td>
+                <p><a href="http://localhost:8080/dynamic">Dynamic Table</a></p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>Events Table Tables</p>
+            </td>
+            <td>
+                <p><a href="http://localhost:8080/events">Events Table</a></p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>KukuCube</p>
+            </td>
+            <td>
+                <p><a href="http://localhost:8080/kukucube">KUKU Cube</a></p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>Tick Tac Toe</p>
+            </td>
+            <td>
+                <p><a href="http://localhost:8080/tickTacToe">Tick-Tack-Toe</a></p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>Delimeter Search</p>
+            </td>
+            <td>
+                <p><a href="http://localhost:8080/delimetersearch">Delimeter Search</a></p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>Dynamic Gried</p>
+            </td>
+            <td>
+                <p><a href="http://localhost:8080/dynamicgrid/1">Dynamic Gried</a></p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>Wireframe Ajax</p>
+            </td>
+            <td>
+                <p><a href="http://localhost:8080/wireframeajax">Wire Frame AJAX</a></p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>Wireframe CRUD</p>
+            </td>
+            <td>
+                <p><a href="http://localhost:8080/wireframecrud">Wire Frame CRUD</a></p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>Student URL</p>
+            </td>
+            <td>
+                <p><a href="http://localhost:8080/studentURL/fname/asc/1">studentURL</a></p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>Student Attendance</p>
+            </td>
+            <td>
+                <p><a href="http://localhost:8080/studentresult/1/12">student Attendance</a></p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>Student Result</p>
+            </td>
+            <td>
+                <p><a href="http://localhost:8080/studentresult/result?pid=1">student result detailed</a></p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>TimeZones</p>
+            </td>
+            <td>
+                <p><a href="http://localhost:8080/timezone">Timezones</a></p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>Dynamic Component</p>
+            </td>
+            <td>
+                <p><a href="http://localhost:8080/component/?comp=state&submit=Submit">Dynamic Component</a></p>
+            </td>
+        </tr>
 
-        <div id="frontEndPagination" class="menus">
-            <p>Front End Pagination</p>
-            <p><a href="http://localhost:8080/frontendpagination">Front End Pagination</a></p>
-        </div>
-
+        <tr>
+            <td>
+                <p>Front End Pagination</p>
+            </td>
+            <td>
+                <p><a href="http://localhost:8080/frontendpagination">Front End Pagination</a></p>
+            </td>
+        </tr>
+    </table>
     </div>
 </body>
 </html>

@@ -232,7 +232,7 @@ const updateData = (req, res) => {
 
     const insertTechnologies = `insert into technology (basic_id, technology_name, status) values(?,?,?)`;
     const updateTechnology = `update technology set technology_name = ?, status = ?  where basic_id = ? and technology_name = ?`;
-
+    
 
     for(let i=0; i<technologies.length; i++){
         // console.log("tid=>", tid[i])
